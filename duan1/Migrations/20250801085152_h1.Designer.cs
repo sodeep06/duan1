@@ -12,7 +12,7 @@ using duan1.Models;
 namespace duan1.Migrations
 {
     [DbContext(typeof(ShopDbContext))]
-    [Migration("20250801023404_h1")]
+    [Migration("20250801085152_h1")]
     partial class h1
     {
         /// <inheritdoc />
@@ -202,6 +202,10 @@ namespace duan1.Migrations
 
                     b.Property<decimal>("GiaBan")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("HinhAnh")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MaDM")
                         .IsRequired()

@@ -75,6 +75,7 @@ namespace duan1.Migrations
                     SoLuong = table.Column<int>(type: "int", nullable: false),
                     MoTa = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     MaDM = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    HinhAnh = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DanhMucMaDM = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>

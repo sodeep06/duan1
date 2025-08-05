@@ -33,6 +33,7 @@
             btnBanHang = new Button();
             btnNhanVien = new Button();
             btnThongKe = new Button();
+            panel1 = new Panel();
             SuspendLayout();
             // 
             // lblChaoMung
@@ -81,11 +82,19 @@
             btnThongKe.Text = "ThongKe";
             btnThongKe.UseVisualStyleBackColor = true;
             // 
+            // panel1
+            // 
+            panel1.Location = new Point(191, 90);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(1415, 632);
+            panel1.TabIndex = 5;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1618, 714);
+            Controls.Add(panel1);
             Controls.Add(btnThongKe);
             Controls.Add(btnNhanVien);
             Controls.Add(btnBanHang);
@@ -104,5 +113,6 @@
         private Button btnBanHang;
         private Button btnNhanVien;
         private Button btnThongKe;
+        private Panel panel1;
     }
 }

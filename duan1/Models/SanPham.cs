@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace duan1.Models
 {
@@ -16,6 +12,7 @@ namespace duan1.Models
         public int SoLuong { get; set; }
         public string MoTa { get; set; }
         public string MaDM { get; set; }
+        public string HinhAnh { get; set; } // <--- Thêm dòng này
 
         public virtual DanhMuc DanhMuc { get; set; }
         public virtual ICollection<ChiTietSanPham> ChiTietSanPhams { get; set; }

@@ -200,6 +200,10 @@ namespace duan1.Migrations
                     b.Property<decimal>("GiaBan")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("HinhAnh")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("MaDM")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

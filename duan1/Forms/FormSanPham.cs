@@ -28,24 +28,30 @@ namespace duan1.Forms
             cbDanhMuc.ValueMember = "MaDM";
         }
 
-        private void LoadSanPham()
+        private void LoadSanPham(string maDM = null)
         {
-            var data = db.SanPhams
-                .Select(sp => new
-                {
-                    sp.MaSP,
-                    sp.TenSP,
-                    sp.GiaBan,
-                    sp.SoLuong,
-                    sp.MoTa,
-                    sp.MaDM,                // <-- thêm mã danh mục
-                    TenDM = sp.DanhMuc.TenDM
-                }).ToList();
+            var query = db.SanPhams.AsQueryable();
+            if (!string.IsNullOrEmpty(maDM))
+                query = query.Where(sp => sp.MaDM == maDM);
+
+            var data = query.Select(sp => new
+            {
+                sp.MaSP,
+                sp.TenSP,
+                sp.GiaBan,
+                sp.SoLuong,
+                sp.MoTa,
+                sp.MaDM,
+                TenDM = sp.DanhMuc.TenDM,
+                sp.HinhAnh
+            }).ToList();
+
             dgvSanPham.DataSource = data;
         }
 
         private void btnThem_Click(object sender, EventArgs e)
         {
+            var hinhAnh = picHinhAnh.Tag != null ? picHinhAnh.Tag.ToString() : null;
             var sp = new SanPham
             {
                 MaSP = txtMaSP.Text,
@@ -53,7 +59,8 @@ namespace duan1.Forms
                 GiaBan = decimal.Parse(txtGiaBan.Text),
                 SoLuong = int.Parse(txtSoLuong.Text),
                 MoTa = txtMoTa.Text,
-                MaDM = cbDanhMuc.SelectedValue.ToString()
+                MaDM = cbDanhMuc.SelectedValue.ToString(),
+                HinhAnh = hinhAnh
             };
 
             db.SanPhams.Add(sp);
@@ -73,6 +80,9 @@ namespace duan1.Forms
                 sp.SoLuong = int.Parse(txtSoLuong.Text);
                 sp.MoTa = txtMoTa.Text;
                 sp.MaDM = cbDanhMuc.SelectedValue.ToString();
+                if (picHinhAnh.Tag != null)
+                    sp.HinhAnh = picHinhAnh.Tag.ToString();
+
                 db.SaveChanges();
                 LoadSanPham();
                 MessageBox.Show("Cập nhật thành công!");
@@ -99,9 +109,16 @@ namespace duan1.Forms
             txtGiaBan.Clear();
             txtSoLuong.Clear();
             txtMoTa.Clear();
-            cbDanhMuc.SelectedIndex = 0;
+            cbDanhMuc.SelectedIndex = -1; // Bỏ chọn danh mục
+            picHinhAnh.Image = null;
+            picHinhAnh.Tag = null;
+
+            LoadSanPham(); // Hiển thị tất cả sản phẩm trên DataGridView
+            dgvSanPham.ClearSelection(); // (Tùy chọn) Bỏ chọn dòng trên DGV
         }
 
+
+        private bool isSelectingFromGrid = false;
         private void dgvSanPham_CellClick(object sender, DataGridViewCellEventArgs e)
 
         {
@@ -114,40 +131,47 @@ namespace duan1.Forms
                 txtSoLuong.Text = row.Cells[3].Value?.ToString();
                 txtMoTa.Text = row.Cells[4].Value?.ToString();
 
-                // Gán mã danh mục nếu tồn tại trong ComboBox
+                // Gán mã danh mục vào ComboBox nhưng KHÔNG TRIGGER lọc
+                isSelectingFromGrid = true; // Đặt cờ để không lọc
                 var maDM = row.Cells[5].Value?.ToString();
                 var danhMucList = cbDanhMuc.DataSource as List<DanhMuc>;
-                if (maDM != null && danhMucList != null && danhMucList.Any(dm => dm.MaDM == maDM))
+                if (!string.IsNullOrEmpty(maDM) && danhMucList != null && danhMucList.Any(dm => dm.MaDM == maDM))
                     cbDanhMuc.SelectedValue = maDM;
                 else
                     cbDanhMuc.SelectedIndex = -1;
+                isSelectingFromGrid = false;
+
+                // Chỉ lấy hình ảnh nếu đủ cột!
+                string hinhAnh = null;
+                if (row.Cells.Count > 7)
+                    hinhAnh = row.Cells[7].Value?.ToString();
+
+                if (!string.IsNullOrEmpty(hinhAnh) && System.IO.File.Exists(hinhAnh))
+                {
+                    picHinhAnh.Image = Image.FromFile(hinhAnh);
+                    picHinhAnh.Tag = hinhAnh;
+                }
+                else
+                {
+                    picHinhAnh.Image = null;
+                    picHinhAnh.Tag = null;
+                }
             }
         }
 
+
+
         private void cbDanhMuc_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbDanhMuc.SelectedValue != null)
+            if (isSelectingFromGrid) return; // Nếu đang thao tác từ DataGridView thì bỏ qua, không lọc
+
+            if (cbDanhMuc.SelectedIndex == -1 || cbDanhMuc.SelectedValue == null)
             {
-                var maDM = cbDanhMuc.SelectedValue.ToString();
-                var data = db.SanPhams
-                    .Where(sp => sp.MaDM == maDM)
-                    .Select(sp => new
-                    {
-                        sp.MaSP,
-                        sp.TenSP,
-                        sp.GiaBan,
-                        sp.SoLuong,
-                        sp.MoTa,
-                        sp.MaDM,
-                        TenDM = sp.DanhMuc.TenDM
-                    })
-                    .ToList();
-                dgvSanPham.DataSource = data;
+                LoadSanPham(); // Hiển thị tất cả sản phẩm
             }
             else
             {
-                // Nếu không hợp lệ thì không làm gì hoặc load tất cả sản phẩm
-                // LoadSanPham();
+                LoadSanPham(cbDanhMuc.SelectedValue.ToString()); // Lọc theo mã danh mục
             }
         }
 
@@ -155,5 +179,64 @@ namespace duan1.Forms
         {
 
         }
+
+        private void btnChonAnh_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp";
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    picHinhAnh.Image = Image.FromFile(ofd.FileName);
+                    picHinhAnh.Tag = ofd.FileName; // Lưu đường dẫn tạm vào Tag để xử lý khi lưu DB
+                }
+            }
+        }
+
+        private void btnTimKiem_Click(object sender, EventArgs e)
+        {
+            string tuKhoa = txtTimKiem.Text.Trim().ToLower();
+            if (string.IsNullOrEmpty(tuKhoa))
+            {
+                LoadSanPham(); // Nếu không nhập gì thì hiển thị full sản phẩm
+                return;
+            }
+
+            var data = db.SanPhams
+                .Where(sp =>
+                    sp.MaSP.ToLower().Contains(tuKhoa) ||
+                    sp.TenSP.ToLower().Contains(tuKhoa) ||
+                    sp.MoTa.ToLower().Contains(tuKhoa)
+                )
+                .Select(sp => new
+                {
+                    sp.MaSP,
+                    sp.TenSP,
+                    sp.GiaBan,
+                    sp.SoLuong,
+                    sp.MoTa,
+                    sp.MaDM,
+                    TenDM = sp.DanhMuc.TenDM,
+                    sp.HinhAnh
+                }).ToList();
+
+            dgvSanPham.DataSource = data;
+        }
+
+        private void txtTimKiem_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnTimKiem.PerformClick();
+            }
+        }
+
+        private void FormSanPham_Load(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }
+

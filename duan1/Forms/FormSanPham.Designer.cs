@@ -45,66 +45,72 @@
             label4 = new Label();
             label5 = new Label();
             label6 = new Label();
+            picHinhAnh = new PictureBox();
+            btnChonAnh = new Button();
+            txtTimKiem = new TextBox();
+            btnTimKiem = new Button();
+            label7 = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvSanPham).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)picHinhAnh).BeginInit();
             SuspendLayout();
             // 
             // dgvSanPham
             // 
             dgvSanPham.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvSanPham.Location = new Point(12, 250);
+            dgvSanPham.Location = new Point(634, 45);
             dgvSanPham.Name = "dgvSanPham";
             dgvSanPham.RowHeadersWidth = 51;
-            dgvSanPham.Size = new Size(794, 188);
+            dgvSanPham.Size = new Size(987, 660);
             dgvSanPham.TabIndex = 0;
             dgvSanPham.CellClick += dgvSanPham_CellClick;
             // 
             // txtMaSP
             // 
-            txtMaSP.Location = new Point(83, 51);
+            txtMaSP.Location = new Point(102, 344);
             txtMaSP.Name = "txtMaSP";
-            txtMaSP.Size = new Size(125, 27);
+            txtMaSP.Size = new Size(180, 27);
             txtMaSP.TabIndex = 1;
             // 
             // txtTenSP
             // 
-            txtTenSP.Location = new Point(278, 51);
+            txtTenSP.Location = new Point(102, 302);
             txtTenSP.Name = "txtTenSP";
-            txtTenSP.Size = new Size(125, 27);
+            txtTenSP.Size = new Size(180, 27);
             txtTenSP.TabIndex = 2;
             // 
             // txtGiaBan
             // 
-            txtGiaBan.Location = new Point(492, 54);
+            txtGiaBan.Location = new Point(102, 466);
             txtGiaBan.Name = "txtGiaBan";
-            txtGiaBan.Size = new Size(125, 27);
+            txtGiaBan.Size = new Size(180, 27);
             txtGiaBan.TabIndex = 3;
             // 
             // txtSoLuong
             // 
-            txtSoLuong.Location = new Point(83, 136);
+            txtSoLuong.Location = new Point(102, 387);
             txtSoLuong.Name = "txtSoLuong";
-            txtSoLuong.Size = new Size(125, 27);
+            txtSoLuong.Size = new Size(180, 27);
             txtSoLuong.TabIndex = 4;
             // 
             // txtMoTa
             // 
-            txtMoTa.Location = new Point(278, 136);
+            txtMoTa.Location = new Point(102, 426);
             txtMoTa.Name = "txtMoTa";
-            txtMoTa.Size = new Size(125, 27);
+            txtMoTa.Size = new Size(180, 27);
             txtMoTa.TabIndex = 5;
             // 
             // cbDanhMuc
             // 
             cbDanhMuc.FormattingEnabled = true;
-            cbDanhMuc.Location = new Point(499, 141);
+            cbDanhMuc.Location = new Point(102, 503);
             cbDanhMuc.Name = "cbDanhMuc";
-            cbDanhMuc.Size = new Size(151, 28);
+            cbDanhMuc.Size = new Size(180, 28);
             cbDanhMuc.TabIndex = 6;
             cbDanhMuc.SelectedIndexChanged += cbDanhMuc_SelectedIndexChanged;
             // 
             // btnThem
             // 
-            btnThem.Location = new Point(65, 194);
+            btnThem.Location = new Point(471, 370);
             btnThem.Name = "btnThem";
             btnThem.Size = new Size(94, 29);
             btnThem.TabIndex = 7;
@@ -114,7 +120,7 @@
             // 
             // btnSua
             // 
-            btnSua.Location = new Point(279, 203);
+            btnSua.Location = new Point(471, 483);
             btnSua.Name = "btnSua";
             btnSua.Size = new Size(94, 29);
             btnSua.TabIndex = 8;
@@ -124,7 +130,7 @@
             // 
             // btnXoa
             // 
-            btnXoa.Location = new Point(465, 203);
+            btnXoa.Location = new Point(471, 429);
             btnXoa.Name = "btnXoa";
             btnXoa.Size = new Size(94, 29);
             btnXoa.TabIndex = 9;
@@ -134,7 +140,7 @@
             // 
             // btnLamMoi
             // 
-            btnLamMoi.Location = new Point(652, 203);
+            btnLamMoi.Location = new Point(471, 317);
             btnLamMoi.Name = "btnLamMoi";
             btnLamMoi.Size = new Size(94, 29);
             btnLamMoi.TabIndex = 10;
@@ -145,7 +151,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(27, 54);
+            label1.Location = new Point(12, 347);
             label1.Name = "label1";
             label1.Size = new Size(46, 20);
             label1.TabIndex = 11;
@@ -155,7 +161,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(12, 139);
+            label2.Location = new Point(12, 390);
             label2.Name = "label2";
             label2.Size = new Size(67, 20);
             label2.TabIndex = 12;
@@ -164,7 +170,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(222, 58);
+            label3.Location = new Point(12, 309);
             label3.Name = "label3";
             label3.Size = new Size(32, 20);
             label3.TabIndex = 13;
@@ -173,7 +179,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(223, 143);
+            label4.Location = new Point(12, 429);
             label4.Name = "label4";
             label4.Size = new Size(45, 20);
             label4.TabIndex = 14;
@@ -182,7 +188,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(438, 57);
+            label5.Location = new Point(15, 469);
             label5.Name = "label5";
             label5.Size = new Size(31, 20);
             label5.TabIndex = 15;
@@ -191,17 +197,67 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(417, 144);
+            label6.Location = new Point(15, 503);
             label6.Name = "label6";
             label6.Size = new Size(76, 20);
             label6.TabIndex = 16;
             label6.Text = "Danh Muc";
             // 
+            // picHinhAnh
+            // 
+            picHinhAnh.Location = new Point(55, 19);
+            picHinhAnh.Name = "picHinhAnh";
+            picHinhAnh.Size = new Size(510, 270);
+            picHinhAnh.TabIndex = 17;
+            picHinhAnh.TabStop = false;
+            // 
+            // btnChonAnh
+            // 
+            btnChonAnh.Location = new Point(577, 10);
+            btnChonAnh.Name = "btnChonAnh";
+            btnChonAnh.Size = new Size(94, 29);
+            btnChonAnh.TabIndex = 18;
+            btnChonAnh.Text = "Them anh";
+            btnChonAnh.UseVisualStyleBackColor = true;
+            btnChonAnh.Click += btnChonAnh_Click;
+            // 
+            // txtTimKiem
+            // 
+            txtTimKiem.Location = new Point(755, 12);
+            txtTimKiem.Name = "txtTimKiem";
+            txtTimKiem.Size = new Size(125, 27);
+            txtTimKiem.TabIndex = 19;
+            // 
+            // btnTimKiem
+            // 
+            btnTimKiem.Location = new Point(886, 10);
+            btnTimKiem.Name = "btnTimKiem";
+            btnTimKiem.Size = new Size(94, 29);
+            btnTimKiem.TabIndex = 20;
+            btnTimKiem.Text = "Tim`";
+            btnTimKiem.UseVisualStyleBackColor = true;
+            btnTimKiem.Click += btnTimKiem_Click;
+            btnTimKiem.KeyDown += txtTimKiem_KeyDown;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(677, 15);
+            label7.Name = "label7";
+            label7.Size = new Size(72, 20);
+            label7.TabIndex = 21;
+            label7.Text = "Tim Kiem";
+            // 
             // FormSanPham
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1633, 717);
+            Controls.Add(label7);
+            Controls.Add(btnTimKiem);
+            Controls.Add(txtTimKiem);
+            Controls.Add(btnChonAnh);
+            Controls.Add(picHinhAnh);
             Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(label4);
@@ -221,7 +277,9 @@
             Controls.Add(dgvSanPham);
             Name = "FormSanPham";
             Text = "FormSanPham";
+            Load += FormSanPham_Load;
             ((System.ComponentModel.ISupportInitialize)dgvSanPham).EndInit();
+            ((System.ComponentModel.ISupportInitialize)picHinhAnh).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -245,5 +303,10 @@
         private Label label4;
         private Label label5;
         private Label label6;
+        private PictureBox picHinhAnh;
+        private Button btnChonAnh;
+        private TextBox txtTimKiem;
+        private Button btnTimKiem;
+        private Label label7;
     }
 }

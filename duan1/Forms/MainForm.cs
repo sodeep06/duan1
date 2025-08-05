@@ -21,12 +21,26 @@ namespace duan1.Forms
             PhanQuyen();
         }
 
+        Form curenForm = new Form();
+        void ChangForm(Form form)
+        {
+            curenForm.Controls.Clear();
+            curenForm = form;
+            form.FormBorderStyle = FormBorderStyle.None;
+            form.TopLevel = false;
+            form.Dock = DockStyle.Fill;
+            panel1.Controls.Add(curenForm);
+            form.BringToFront();
+            form.Show();
+
+        }
         private void btnSanPham_Click(object sender, EventArgs e)
         {
-            var frm = new FormSanPham();
-            frm.ShowDialog();
+            ChangForm(new FormSanPham());
         }
 
+
+  
 
         private void PhanQuyen()
         {
