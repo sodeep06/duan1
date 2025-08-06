@@ -27,7 +27,7 @@ namespace duan1.Models
         private static DbContextOptions<ShopDbContext> GetOptions()
         {
             var optionsBuilder = new DbContextOptionsBuilder<ShopDbContext>();
-            optionsBuilder.UseSqlServer("Server=localhost;Database=duan1;User Id=sa;Password=12345678;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer("Server=DESKTOP-VPATL7J\\SQLEXPRESS;Database=DuAn1;Trusted_Connection=True;TrustServerCertificate=True");
             return optionsBuilder.Options;
         }
 
