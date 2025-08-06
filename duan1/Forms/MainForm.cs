@@ -34,15 +34,20 @@ namespace duan1.Forms
             form.Show();
 
         }
-        
-        //Quản lý nhân viên
+
+
         private void btnSanPham_Click(object sender, EventArgs e)
         {
-            ChangForm(new FormQLNhanVien());
+            ChangForm(new FormSanPham());
         }
 
 
 
+        //Quản lý nhân viên
+        private void btnQuanLyNV_Click(object sender, EventArgs e)
+        {
+            ChangForm(new FormQLNhanVien());
+        }
 
         private void PhanQuyen()
         {
@@ -52,12 +57,22 @@ namespace duan1.Forms
             {
                 btnNhanVien.Enabled = true;
                 btnThongKe.Enabled = true;
+                btnVoucher.Enabled = true;
             }
             else // Nhân viên
             {
                 btnNhanVien.Enabled = false;
                 btnThongKe.Enabled = false;
+                btnVoucher.Enabled = false;
             }
         }
+
+        //Quản lý Voucher
+        private void btnQLVoucher_Click(object sender, EventArgs e)
+        {
+            ChangForm(new FormQLVoucher());
+        }
+
+
     }
 }
