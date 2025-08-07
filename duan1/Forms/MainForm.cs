@@ -34,12 +34,9 @@ namespace duan1.Forms
             form.Show();
 
         }
-        
+
         //Quản lý nhân viên
-        private void btnSanPham_Click(object sender, EventArgs e)
-        {
-            ChangForm(new FormQLNhanVien());
-        }
+
 
 
 
@@ -58,6 +55,16 @@ namespace duan1.Forms
                 btnNhanVien.Enabled = false;
                 btnThongKe.Enabled = false;
             }
+        }
+
+        private void btnQuanLyNV_Click(object sender, EventArgs e)
+        {
+            ChangForm(new FormQLNhanVien());
+        }
+
+        private void btnSanPham_Click(object sender, EventArgs e)
+        {
+            ChangForm(new FormSanPham());
         }
     }
 }
