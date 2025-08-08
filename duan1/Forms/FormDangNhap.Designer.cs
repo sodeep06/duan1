@@ -54,7 +54,7 @@
             // 
             // btnDangNhap
             // 
-            btnDangNhap.Location = new Point(342, 462);
+            btnDangNhap.Location = new Point(337, 462);
             btnDangNhap.Name = "btnDangNhap";
             btnDangNhap.Size = new Size(94, 29);
             btnDangNhap.TabIndex = 2;

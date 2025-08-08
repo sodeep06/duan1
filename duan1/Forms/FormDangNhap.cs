@@ -17,6 +17,7 @@ namespace duan1.Forms
         public FormDangNhap()
         {
             InitializeComponent();
+            txtMatKhau.UseSystemPasswordChar = true; // <--- Dòng này
         }
 
         private void btnDangNhap_Click(object sender, EventArgs e)

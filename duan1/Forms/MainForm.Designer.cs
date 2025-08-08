@@ -52,7 +52,7 @@
             btnSanPham.Name = "btnSanPham";
             btnSanPham.Size = new Size(152, 70);
             btnSanPham.TabIndex = 1;
-            btnSanPham.Text = "SanPham";
+            btnSanPham.Text = "Sản Phẩm";
             btnSanPham.UseVisualStyleBackColor = true;
             btnSanPham.Click += btnSanPham_Click;
             // 
@@ -62,7 +62,7 @@
             btnBanHang.Name = "btnBanHang";
             btnBanHang.Size = new Size(152, 70);
             btnBanHang.TabIndex = 2;
-            btnBanHang.Text = "BanHang";
+            btnBanHang.Text = "Bán Hàng";
             btnBanHang.UseVisualStyleBackColor = true;
             // 
             // btnThongKe
@@ -71,7 +71,7 @@
             btnThongKe.Name = "btnThongKe";
             btnThongKe.Size = new Size(152, 70);
             btnThongKe.TabIndex = 4;
-            btnThongKe.Text = "ThongKe";
+            btnThongKe.Text = "Thống Kê";
             btnThongKe.UseVisualStyleBackColor = true;
             // 
             // panel1
@@ -87,7 +87,7 @@
             btnNhanVien.Name = "btnNhanVien";
             btnNhanVien.Size = new Size(152, 70);
             btnNhanVien.TabIndex = 6;
-            btnNhanVien.Text = "QuanLyNV";
+            btnNhanVien.Text = "Quản Lý Nhân Viên";
             btnNhanVien.UseVisualStyleBackColor = true;
             btnNhanVien.Click += btnQuanLyNV_Click;
             // 
@@ -97,7 +97,7 @@
             btnVoucher.Name = "btnVoucher";
             btnVoucher.Size = new Size(152, 70);
             btnVoucher.TabIndex = 7;
-            btnVoucher.Text = "QLVoucher";
+            btnVoucher.Text = "Quản Lý Voucher";
             btnVoucher.UseVisualStyleBackColor = true;
             btnVoucher.Click += btnQLVoucher_Click;
             // 

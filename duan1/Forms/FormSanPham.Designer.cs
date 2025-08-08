@@ -66,35 +66,35 @@
             // 
             // txtMaSP
             // 
-            txtMaSP.Location = new Point(102, 344);
+            txtMaSP.Location = new Point(121, 344);
             txtMaSP.Name = "txtMaSP";
             txtMaSP.Size = new Size(180, 27);
             txtMaSP.TabIndex = 1;
             // 
             // txtTenSP
             // 
-            txtTenSP.Location = new Point(102, 302);
+            txtTenSP.Location = new Point(121, 302);
             txtTenSP.Name = "txtTenSP";
             txtTenSP.Size = new Size(180, 27);
             txtTenSP.TabIndex = 2;
             // 
             // txtGiaBan
             // 
-            txtGiaBan.Location = new Point(102, 466);
+            txtGiaBan.Location = new Point(121, 466);
             txtGiaBan.Name = "txtGiaBan";
             txtGiaBan.Size = new Size(180, 27);
             txtGiaBan.TabIndex = 3;
             // 
             // txtSoLuong
             // 
-            txtSoLuong.Location = new Point(102, 387);
+            txtSoLuong.Location = new Point(121, 387);
             txtSoLuong.Name = "txtSoLuong";
             txtSoLuong.Size = new Size(180, 27);
             txtSoLuong.TabIndex = 4;
             // 
             // txtMoTa
             // 
-            txtMoTa.Location = new Point(102, 426);
+            txtMoTa.Location = new Point(121, 426);
             txtMoTa.Name = "txtMoTa";
             txtMoTa.Size = new Size(180, 27);
             txtMoTa.TabIndex = 5;
@@ -102,7 +102,7 @@
             // cbDanhMuc
             // 
             cbDanhMuc.FormattingEnabled = true;
-            cbDanhMuc.Location = new Point(102, 503);
+            cbDanhMuc.Location = new Point(121, 503);
             cbDanhMuc.Name = "cbDanhMuc";
             cbDanhMuc.Size = new Size(180, 28);
             cbDanhMuc.TabIndex = 6;
@@ -114,7 +114,7 @@
             btnThem.Name = "btnThem";
             btnThem.Size = new Size(94, 29);
             btnThem.TabIndex = 7;
-            btnThem.Text = "Them";
+            btnThem.Text = "Thêm";
             btnThem.UseVisualStyleBackColor = true;
             btnThem.Click += btnThem_Click;
             // 
@@ -124,7 +124,7 @@
             btnSua.Name = "btnSua";
             btnSua.Size = new Size(94, 29);
             btnSua.TabIndex = 8;
-            btnSua.Text = "Sua";
+            btnSua.Text = "Sửa";
             btnSua.UseVisualStyleBackColor = true;
             btnSua.Click += btnSua_Click;
             // 
@@ -134,7 +134,7 @@
             btnXoa.Name = "btnXoa";
             btnXoa.Size = new Size(94, 29);
             btnXoa.TabIndex = 9;
-            btnXoa.Text = "Xoa";
+            btnXoa.Text = "Xóa";
             btnXoa.UseVisualStyleBackColor = true;
             btnXoa.Click += btnXoa_Click;
             // 
@@ -153,55 +153,54 @@
             label1.AutoSize = true;
             label1.Location = new Point(12, 347);
             label1.Name = "label1";
-            label1.Size = new Size(46, 20);
+            label1.Size = new Size(103, 20);
             label1.TabIndex = 11;
-            label1.Text = "MaSP";
-            label1.Click += label1_Click;
+            label1.Text = "Mã Sản phẩm:";
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Location = new Point(12, 390);
             label2.Name = "label2";
-            label2.Size = new Size(67, 20);
+            label2.Size = new Size(75, 20);
             label2.TabIndex = 12;
-            label2.Text = "SoLuong";
+            label2.Text = "Số Lượng:";
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Location = new Point(12, 309);
             label3.Name = "label3";
-            label3.Size = new Size(32, 20);
+            label3.Size = new Size(35, 20);
             label3.TabIndex = 13;
-            label3.Text = "Ten";
+            label3.Text = "Tên:";
             // 
             // label4
             // 
             label4.AutoSize = true;
             label4.Location = new Point(12, 429);
             label4.Name = "label4";
-            label4.Size = new Size(45, 20);
+            label4.Size = new Size(54, 20);
             label4.TabIndex = 14;
-            label4.Text = "MoTa";
+            label4.Text = "Mô Tả:";
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Location = new Point(15, 469);
             label5.Name = "label5";
-            label5.Size = new Size(31, 20);
+            label5.Size = new Size(34, 20);
             label5.TabIndex = 15;
-            label5.Text = "Gia";
+            label5.Text = "Giá:";
             // 
             // label6
             // 
             label6.AutoSize = true;
             label6.Location = new Point(15, 503);
             label6.Name = "label6";
-            label6.Size = new Size(76, 20);
+            label6.Size = new Size(79, 20);
             label6.TabIndex = 16;
-            label6.Text = "Danh Muc";
+            label6.Text = "Danh Mục:";
             // 
             // picHinhAnh
             // 
@@ -217,7 +216,7 @@
             btnChonAnh.Name = "btnChonAnh";
             btnChonAnh.Size = new Size(94, 29);
             btnChonAnh.TabIndex = 18;
-            btnChonAnh.Text = "Them anh";
+            btnChonAnh.Text = "Thêm ảnh";
             btnChonAnh.UseVisualStyleBackColor = true;
             btnChonAnh.Click += btnChonAnh_Click;
             // 
@@ -234,7 +233,7 @@
             btnTimKiem.Name = "btnTimKiem";
             btnTimKiem.Size = new Size(94, 29);
             btnTimKiem.TabIndex = 20;
-            btnTimKiem.Text = "Tim`";
+            btnTimKiem.Text = "Tìm";
             btnTimKiem.UseVisualStyleBackColor = true;
             btnTimKiem.Click += btnTimKiem_Click;
             btnTimKiem.KeyDown += txtTimKiem_KeyDown;
@@ -244,9 +243,9 @@
             label7.AutoSize = true;
             label7.Location = new Point(677, 15);
             label7.Name = "label7";
-            label7.Size = new Size(72, 20);
+            label7.Size = new Size(73, 20);
             label7.TabIndex = 21;
-            label7.Text = "Tim Kiem";
+            label7.Text = "Tìm kiếm:";
             // 
             // FormSanPham
             // 
