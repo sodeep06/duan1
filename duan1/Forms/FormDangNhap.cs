@@ -27,15 +27,31 @@ namespace duan1.Forms
             var nv = db.NhanViens.FirstOrDefault(x => x.Email == email && x.MatKhau == matkhau);
             if (nv != null)
             {
-                // Đăng nhập thành công, mở MainForm và truyền thông tin
-                this.Hide();
-                var mainForm = new MainForm(nv);
-                mainForm.ShowDialog();
-                this.Close();
+                lab_thongBao.Text = "Dang nhap thanh cong...";
+                lab_thongBao.ForeColor = Color.Green;
+                if(nv.VaiTro == "QL")
+                {
+                    // vai tro QL -> mo main form
+                    this.Hide();
+                    var mainForm = new MainForm(nv);
+                    mainForm.ShowDialog();
+                    this.Close();
+                }
+                else
+                {
+                    // vai tro nhan vien -> mo ban hang
+                    this.Hide();
+                    var banHangForm = new FormBanHang();
+                    banHangForm.ShowDialog();
+                    this.Close();
+                }
+                
             }
             else
             {
-                MessageBox.Show("Tài khoản hoặc mật khẩu không đúng!", "Đăng nhập thất bại", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
+                lab_thongBao.Text = "Tai khoan hoac mat khau sai!";
+                lab_thongBao.ForeColor = System.Drawing.Color.Red;
             }
         }
     }

@@ -40,17 +40,18 @@
             // lblChaoMung
             // 
             lblChaoMung.AutoSize = true;
-            lblChaoMung.Location = new Point(341, 43);
+            lblChaoMung.Location = new Point(298, 32);
             lblChaoMung.Name = "lblChaoMung";
-            lblChaoMung.Size = new Size(71, 20);
+            lblChaoMung.Size = new Size(57, 15);
             lblChaoMung.TabIndex = 0;
             lblChaoMung.Text = "Welcome";
             // 
             // btnSanPham
             // 
-            btnSanPham.Location = new Point(12, 89);
+            btnSanPham.Location = new Point(10, 67);
+            btnSanPham.Margin = new Padding(3, 2, 3, 2);
             btnSanPham.Name = "btnSanPham";
-            btnSanPham.Size = new Size(152, 70);
+            btnSanPham.Size = new Size(133, 52);
             btnSanPham.TabIndex = 1;
             btnSanPham.Text = "SanPham";
             btnSanPham.UseVisualStyleBackColor = true;
@@ -58,43 +59,48 @@
             // 
             // btnBanHang
             // 
-            btnBanHang.Location = new Point(12, 165);
+            btnBanHang.Location = new Point(10, 124);
+            btnBanHang.Margin = new Padding(3, 2, 3, 2);
             btnBanHang.Name = "btnBanHang";
-            btnBanHang.Size = new Size(152, 70);
+            btnBanHang.Size = new Size(133, 52);
             btnBanHang.TabIndex = 2;
             btnBanHang.Text = "BanHang";
             btnBanHang.UseVisualStyleBackColor = true;
             // 
             // btnNhanVien
             // 
-            btnNhanVien.Location = new Point(12, 241);
+            btnNhanVien.Location = new Point(10, 181);
+            btnNhanVien.Margin = new Padding(3, 2, 3, 2);
             btnNhanVien.Name = "btnNhanVien";
-            btnNhanVien.Size = new Size(152, 70);
+            btnNhanVien.Size = new Size(133, 52);
             btnNhanVien.TabIndex = 3;
             btnNhanVien.Text = "QuanLyNV";
             btnNhanVien.UseVisualStyleBackColor = true;
             // 
             // btnThongKe
             // 
-            btnThongKe.Location = new Point(12, 317);
+            btnThongKe.Location = new Point(10, 238);
+            btnThongKe.Margin = new Padding(3, 2, 3, 2);
             btnThongKe.Name = "btnThongKe";
-            btnThongKe.Size = new Size(152, 70);
+            btnThongKe.Size = new Size(133, 52);
             btnThongKe.TabIndex = 4;
             btnThongKe.Text = "ThongKe";
             btnThongKe.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
-            panel1.Location = new Point(191, 90);
+            panel1.Location = new Point(167, 68);
+            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1415, 632);
+            panel1.Size = new Size(1238, 474);
             panel1.TabIndex = 5;
             // 
             // btnQLNhanVien
             // 
-            btnQLNhanVien.Location = new Point(12, 393);
+            btnQLNhanVien.Location = new Point(10, 295);
+            btnQLNhanVien.Margin = new Padding(3, 2, 3, 2);
             btnQLNhanVien.Name = "btnQLNhanVien";
-            btnQLNhanVien.Size = new Size(152, 70);
+            btnQLNhanVien.Size = new Size(133, 52);
             btnQLNhanVien.TabIndex = 6;
             btnQLNhanVien.Text = "QLNhanVien";
             btnQLNhanVien.UseVisualStyleBackColor = true;
@@ -102,9 +108,9 @@
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1618, 714);
+            ClientSize = new Size(1199, 536);
             Controls.Add(btnQLNhanVien);
             Controls.Add(panel1);
             Controls.Add(btnThongKe);
@@ -112,8 +118,11 @@
             Controls.Add(btnBanHang);
             Controls.Add(btnSanPham);
             Controls.Add(lblChaoMung);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "MainForm";
             Text = "MainForm";
+            WindowState = FormWindowState.Maximized;
+            Load += MainForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }
