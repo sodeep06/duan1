@@ -24,8 +24,8 @@ namespace duan1.Forms
             string email = txtEmail.Text.Trim();
             string matkhau = txtMatKhau.Text.Trim();
 
-            var nv = db.NhanViens.FirstOrDefault(x => x.Email == email && x.MatKhau == matkhau);
-            if (nv != null)
+            var nv = db.NhanViens.FirstOrDefault(x => x.Email == email);
+            if (nv != null && matkhau == nv.MatKhau)
             {
                 lab_thongBao.Text = "Dang nhap thanh cong...";
                 lab_thongBao.ForeColor = Color.Green;
@@ -47,11 +47,16 @@ namespace duan1.Forms
                 }
                 
             }
+            else if (nv == null)
+            {
+                lab_thongBao.Text = "Tai khoan khong ton tai!";
+                lab_thongBao.ForeColor = Color.Red;
+            }
             else
             {
-                
-                lab_thongBao.Text = "Tai khoan hoac mat khau sai!";
-                lab_thongBao.ForeColor = System.Drawing.Color.Red;
+                var mk = nv.MatKhau;
+                lab_thongBao.Text = $"Mat khau phai la: {mk}";
+                lab_thongBao.ForeColor = Color.Red;
             }
         }
     }
