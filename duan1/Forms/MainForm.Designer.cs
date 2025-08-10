@@ -37,6 +37,7 @@
             btnVoucher = new Button();
             btn_qlyNhanVien = new Button();
             btn_qlyVoucher = new Button();
+            btn_hoaDon = new Button();
             SuspendLayout();
             // 
             // lblChaoMung
@@ -81,6 +82,7 @@
             // 
             // panel1
             // 
+            panel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             panel1.Location = new Point(167, 68);
             panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
@@ -127,11 +129,23 @@
             btn_qlyVoucher.UseVisualStyleBackColor = true;
             btn_qlyVoucher.Click += btn_qlyVoucher_Click;
             // 
+            // btn_hoaDon
+            // 
+            btn_hoaDon.Location = new Point(10, 415);
+            btn_hoaDon.Margin = new Padding(3, 2, 3, 2);
+            btn_hoaDon.Name = "btn_hoaDon";
+            btn_hoaDon.Size = new Size(133, 52);
+            btn_hoaDon.TabIndex = 7;
+            btn_hoaDon.Text = "Hóa đơn";
+            btn_hoaDon.UseVisualStyleBackColor = true;
+            btn_hoaDon.Click += btn_hoaDon_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(738, 351);
+            ClientSize = new Size(1370, 621);
+            Controls.Add(btn_hoaDon);
             Controls.Add(btn_qlyVoucher);
             Controls.Add(btn_qlyNhanVien);
             Controls.Add(panel1);
@@ -158,5 +172,6 @@
         private Button btnVoucher;
         private Button btn_qlyNhanVien;
         private Button btn_qlyVoucher;
+        private Button btn_hoaDon;
     }
 }
