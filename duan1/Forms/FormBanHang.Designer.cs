@@ -68,11 +68,15 @@
             label12 = new Label();
             cbo_choTietSanPham = new ComboBox();
             label13 = new Label();
+            btn_xoaSanPham = new Button();
+            num_soLuongSua = new NumericUpDown();
+            btn_CapNhat = new Button();
             ((System.ComponentModel.ISupportInitialize)dtg_sanPham).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dtg_khachHang).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dtg_gioHang).BeginInit();
             ((System.ComponentModel.ISupportInitialize)num_soLuong).BeginInit();
             groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)num_soLuongSua).BeginInit();
             SuspendLayout();
             // 
             // dtg_sanPham
@@ -106,6 +110,7 @@
             dtg_sanPham.TabIndex = 0;
             dtg_sanPham.CellClick += dtg_sanPham_CellClick;
             dtg_sanPham.CellDoubleClick += dtg_sanPham_CellDoubleClick;
+            dtg_sanPham.CellEndEdit += dtg_sanPham_CellEndEdit;
             // 
             // label1
             // 
@@ -144,10 +149,8 @@
             dtg_khachHang.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dtg_khachHang.BackgroundColor = SystemColors.Control;
             dtg_khachHang.BorderStyle = BorderStyle.None;
-            dtg_khachHang.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dtg_khachHang.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dtg_khachHang.Cursor = Cursors.Hand;
-            dtg_khachHang.DefaultCellStyle = dataGridViewCellStyle2;
             dtg_khachHang.Location = new Point(26, 350);
             dtg_khachHang.Name = "dtg_khachHang";
             dtg_khachHang.ReadOnly = true;
@@ -155,6 +158,7 @@
             dtg_khachHang.Size = new Size(681, 150);
             dtg_khachHang.TabIndex = 3;
             dtg_khachHang.CellClick += dtg_khachHang_CellClick;
+            dtg_khachHang.CellEndEdit += dtg_sanPham_CellEndEdit;
             // 
             // btn_them
             // 
@@ -170,16 +174,16 @@
             dtg_gioHang.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dtg_gioHang.BackgroundColor = SystemColors.Control;
             dtg_gioHang.BorderStyle = BorderStyle.None;
-            dtg_gioHang.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dtg_gioHang.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dtg_gioHang.Cursor = Cursors.Hand;
-            dtg_gioHang.DefaultCellStyle = dataGridViewCellStyle2;
             dtg_gioHang.Location = new Point(738, 345);
             dtg_gioHang.Name = "dtg_gioHang";
             dtg_gioHang.ReadOnly = true;
             dtg_gioHang.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dtg_gioHang.Size = new Size(595, 150);
             dtg_gioHang.TabIndex = 7;
+            dtg_gioHang.CellClick += dtg_gioHang_CellClick;
+            dtg_gioHang.CellEndEdit += dtg_sanPham_CellEndEdit;
             // 
             // label3
             // 
@@ -272,7 +276,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(770, 146);
+            label7.Location = new Point(15, 117);
             label7.Name = "label7";
             label7.Size = new Size(51, 15);
             label7.TabIndex = 17;
@@ -306,18 +310,16 @@
             lab_tenSanPham.Name = "lab_tenSanPham";
             lab_tenSanPham.Size = new Size(398, 17);
             lab_tenSanPham.TabIndex = 20;
-            lab_tenSanPham.Text = "@@@";
             lab_tenSanPham.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // lab_donGia
             // 
             lab_donGia.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lab_donGia.ForeColor = Color.Blue;
-            lab_donGia.Location = new Point(869, 146);
+            lab_donGia.Location = new Point(114, 117);
             lab_donGia.Name = "lab_donGia";
             lab_donGia.Size = new Size(398, 17);
             lab_donGia.TabIndex = 21;
-            lab_donGia.Text = "@@@";
             lab_donGia.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // lab_tenKhachHang
@@ -328,7 +330,6 @@
             lab_tenKhachHang.Name = "lab_tenKhachHang";
             lab_tenKhachHang.Size = new Size(398, 17);
             lab_tenKhachHang.TabIndex = 23;
-            lab_tenKhachHang.Text = "@@@";
             lab_tenKhachHang.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // label10
@@ -356,21 +357,23 @@
             // 
             lab_soLuongTon.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lab_soLuongTon.ForeColor = Color.Blue;
-            lab_soLuongTon.Location = new Point(869, 119);
+            lab_soLuongTon.Location = new Point(114, 98);
             lab_soLuongTon.Name = "lab_soLuongTon";
             lab_soLuongTon.Size = new Size(398, 17);
             lab_soLuongTon.TabIndex = 26;
-            lab_soLuongTon.Text = "@@@";
             lab_soLuongTon.TextAlign = ContentAlignment.MiddleLeft;
+            lab_soLuongTon.Visible = false;
+            lab_soLuongTon.Click += lab_soLuongTon_Click;
             // 
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(770, 119);
+            label11.Location = new Point(15, 98);
             label11.Name = "label11";
             label11.Size = new Size(32, 15);
             label11.TabIndex = 25;
             label11.Text = "Còn:";
+            label11.Visible = false;
             // 
             // lab_maSanPham
             // 
@@ -380,7 +383,6 @@
             lab_maSanPham.Name = "lab_maSanPham";
             lab_maSanPham.Size = new Size(398, 17);
             lab_maSanPham.TabIndex = 27;
-            lab_maSanPham.Text = "id@";
             lab_maSanPham.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // lab_maKhachHang
@@ -391,7 +393,6 @@
             lab_maKhachHang.Name = "lab_maKhachHang";
             lab_maKhachHang.Size = new Size(398, 17);
             lab_maKhachHang.TabIndex = 28;
-            lab_maKhachHang.Text = "id@";
             lab_maKhachHang.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // lab_tenNhanVien
@@ -445,6 +446,10 @@
             groupBox1.Controls.Add(lab_thongBaoChon);
             groupBox1.Controls.Add(label12);
             groupBox1.Controls.Add(cbo_choTietSanPham);
+            groupBox1.Controls.Add(lab_soLuongTon);
+            groupBox1.Controls.Add(label11);
+            groupBox1.Controls.Add(lab_donGia);
+            groupBox1.Controls.Add(label7);
             groupBox1.Location = new Point(755, 12);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(578, 250);
@@ -490,12 +495,52 @@
             label13.Text = "Mẹo: Bạn có thể double click để chọn biến thể của sản phẩm";
             label13.TextAlign = ContentAlignment.MiddleLeft;
             // 
+            // btn_xoaSanPham
+            // 
+            btn_xoaSanPham.BackColor = Color.Gainsboro;
+            btn_xoaSanPham.FlatStyle = FlatStyle.Flat;
+            btn_xoaSanPham.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_xoaSanPham.Location = new Point(1240, 313);
+            btn_xoaSanPham.Name = "btn_xoaSanPham";
+            btn_xoaSanPham.Size = new Size(93, 27);
+            btn_xoaSanPham.TabIndex = 36;
+            btn_xoaSanPham.Text = "Xóa";
+            btn_xoaSanPham.UseVisualStyleBackColor = false;
+            btn_xoaSanPham.Click += btn_xoaSanPham_Click;
+            // 
+            // num_soLuongSua
+            // 
+            num_soLuongSua.BackColor = SystemColors.HotTrack;
+            num_soLuongSua.BorderStyle = BorderStyle.None;
+            num_soLuongSua.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            num_soLuongSua.ForeColor = Color.Yellow;
+            num_soLuongSua.Location = new Point(1150, 286);
+            num_soLuongSua.Name = "num_soLuongSua";
+            num_soLuongSua.Size = new Size(74, 19);
+            num_soLuongSua.TabIndex = 37;
+            // 
+            // btn_CapNhat
+            // 
+            btn_CapNhat.BackColor = Color.Gainsboro;
+            btn_CapNhat.FlatStyle = FlatStyle.Flat;
+            btn_CapNhat.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btn_CapNhat.Location = new Point(1240, 278);
+            btn_CapNhat.Name = "btn_CapNhat";
+            btn_CapNhat.Size = new Size(93, 27);
+            btn_CapNhat.TabIndex = 38;
+            btn_CapNhat.Text = "Cập nhật";
+            btn_CapNhat.UseVisualStyleBackColor = false;
+            btn_CapNhat.Click += btn_CapNhat_Click;
+            // 
             // FormBanHang
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1370, 648);
             ControlBox = false;
+            Controls.Add(btn_CapNhat);
+            Controls.Add(num_soLuongSua);
+            Controls.Add(btn_xoaSanPham);
             Controls.Add(label13);
             Controls.Add(lab_maKhachHang);
             Controls.Add(label10);
@@ -504,15 +549,11 @@
             Controls.Add(lab_tenNhanVien);
             Controls.Add(label9);
             Controls.Add(lab_maSanPham);
-            Controls.Add(lab_soLuongTon);
-            Controls.Add(label11);
             Controls.Add(btn_themGioHang);
             Controls.Add(lab_tenKhachHang);
-            Controls.Add(lab_donGia);
             Controls.Add(lab_tenSanPham);
             Controls.Add(num_soLuong);
             Controls.Add(label8);
-            Controls.Add(label7);
             Controls.Add(label6);
             Controls.Add(lab_thongBao);
             Controls.Add(btn_thanhToan);
@@ -542,6 +583,7 @@
             ((System.ComponentModel.ISupportInitialize)num_soLuong).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)num_soLuongSua).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -586,5 +628,8 @@
         private Label label12;
         private Label lab_thongBaoChon;
         private Label label13;
+        private Button btn_xoaSanPham;
+        private NumericUpDown num_soLuongSua;
+        private Button btn_CapNhat;
     }
 }

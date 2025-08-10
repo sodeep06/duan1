@@ -74,26 +74,28 @@ namespace duan1.Repositories
                 return false;
             }
         }
-        public bool TruTonKho(string maSPCT, int soLuong)
+        public void TruTonKho(string maSPCT, int soLuong)
         {
             var ctsp = _context.ChiTietSanPhams.FirstOrDefault(x => x.MaSPCT == maSPCT);
-            if (ctsp == null || ctsp.SoLuongTon < soLuong)
+            if (ctsp != null)
             {
-                return false;
+                ctsp.SoLuongTon -= soLuong;
+                if (ctsp.SoLuongTon < 0) ctsp.SoLuongTon = 0;
+                _context.SaveChanges();
             }
-            ctsp.SoLuongTon -= soLuong;
-
-            var sp = _context.SanPhams.FirstOrDefault(s => s.MaSP == ctsp.MaSP);
-            if (sp != null)
-            {
-                sp.SoLuong = _context.ChiTietSanPhams
-                                .Where(x => x.MaSP == sp.MaSP)
-                                .Sum(x => x.SoLuongTon);
-            }
-
-            _context.SaveChanges();
-            return true;
         }
-
+        public int GetSoLuongTon(string maSPCT)
+        {
+            var ctsp = _context.ChiTietSanPhams.FirstOrDefault(x => x.MaSPCT == maSPCT);
+            if (ctsp != null)
+            {
+                return ctsp.SoLuongTon;
+            }
+            else
+            {
+                MessageBox.Show("Chi tiết sản phẩm không tồn tại.");
+                return 0;
+            }
+        }
     }
 }
