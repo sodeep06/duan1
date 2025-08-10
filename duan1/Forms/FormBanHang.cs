@@ -185,7 +185,7 @@ namespace duan1.Forms
         {
             lab_tenSanPham.Text = string.Empty;
             lab_donGia.Text = string.Empty;
-            num_soLuong.Value = 0;
+            num_soLuong.Value = 1;
             lab_soLuongTon.Text = string.Empty;
             lab_maSanPham.Text = string.Empty;
             cbo_choTietSanPham.DataSource = null;
@@ -294,13 +294,27 @@ namespace duan1.Forms
                 }
             }
 
+            var frmTT = new FormThanhToan(tongTien);
+            if (frmTT.ShowDialog() != DialogResult.OK) return;
+            string trangThai = frmTT.TrangThaiThanhToan;
+
+            var frmXacNhan = new FormXacNhanThanhToan();
+            if (frmXacNhan.ShowDialog() != DialogResult.OK) return;
+
+            bool isXacNhan = frmXacNhan.XacNhanThanhToan;
+
+            if (!isXacNhan)
+            {
+                trangThai = frmXacNhan.LyDoHuy;
+            }
+
             string maDh = Guid.NewGuid().ToString();
             DonHang dh = new DonHang
             {
                 MaDH = maDh,
                 NgayDat = DateTime.Now,
                 TongTien = tongTien,
-                TrangThai = "Đã thanh toán",
+                TrangThai = trangThai,
                 MaKH = lab_maKhachHang.Text,
                 MaNV = PhienDangNhap.MaNV,
                 MaVoucher = maVoucher
@@ -314,20 +328,23 @@ namespace duan1.Forms
                 return;
             }
 
-            foreach (var item in GioHang)
+            if (isXacNhan)
             {
-                item.MaDH = maDh;
-                bool isAdded = dhctRepo.Add(item);
-                if (!isAdded)
+                foreach (var item in GioHang)
                 {
-                    lab_thongBao.Text = "Lỗi khi thêm sản phẩm vào đơn hàng. Vui lòng thử lại.";
-                    lab_thongBao.ForeColor = Color.Red;
-                    return;
+                    item.MaDH = maDh;
+                    bool isAdded = dhctRepo.Add(item);
+                    if (!isAdded)
+                    {
+                        lab_thongBao.Text = "Lỗi khi thêm sản phẩm vào đơn hàng. Vui lòng thử lại.";
+                        lab_thongBao.ForeColor = Color.Red;
+                        return;
+                    }
+                    ctspRepo.TruTonKho(item.MaSPCT, item.SoLuong);
                 }
-                ctspRepo.TruTonKho(item.MaSPCT, item.SoLuong);
             }
 
-            lab_thongBao.Text = "Thanh toán thành công!";
+            lab_thongBao.Text = isXacNhan ? "Thanh toán thành công!" : "Đơn hàng đã bị hủy.";
             lab_thongBao.ForeColor = Color.Green;
 
             LoadData();
@@ -335,6 +352,7 @@ namespace duan1.Forms
             ClearInputFields();
             daApDungVoucher = false;
         }
+
         private void ClearInputFields()
         {
             ClearSanPhamFields();
@@ -346,6 +364,12 @@ namespace duan1.Forms
         }
         private void btn_apDungVoucher_Click(object sender, EventArgs e)
         {
+            if(GioHang.Count == 0)
+            {
+                lab_thongBao.Text = "Có mua cái gì đâu mà đòi dùng voucher?";
+                lab_thongBao.ForeColor = Color.Red;
+                return;
+            }
             if (daApDungVoucher)
             {
                 lab_thongBao.Text = "Voucher đã được áp dụng cho hóa đơn này.";
@@ -443,13 +467,47 @@ namespace duan1.Forms
 
         private void btn_xoaSanPham_Click(object sender, EventArgs e)
         {
-            if (dtg_gioHang.CurrentRow != null)
+            if (dtg_gioHang.Rows.Count == 0)
             {
-                int rowIndex = dtg_gioHang.CurrentRow.Index;
-                GioHang.RemoveAt(rowIndex);
-                LoadGioHang();
-                lab_thongBao.Text = "Đã xóa sản phẩm khỏi giỏ hàng.";
-                lab_thongBao.ForeColor = Color.Green;
+                lab_thongBao.Text = "Giỏ hàng trống.";
+                lab_thongBao.ForeColor = Color.Red;
+                lab_thongBao.Visible = true;
+                return;
+            }
+
+            var maSPCTCanXoa = new List<string>();
+
+            foreach (DataGridViewRow row in dtg_gioHang.Rows)
+            {
+                bool isChecked = false;
+                if (row.Cells["Chon"].Value != null)
+                    isChecked = (bool)row.Cells["Chon"].Value;
+
+                if (isChecked)
+                {
+                    var maSPCT = row.Cells["MaSPCT"].Value.ToString();
+                    maSPCTCanXoa.Add(maSPCT);
+                }
+            }
+
+            if (maSPCTCanXoa.Count == 0)
+            {
+                lab_thongBao.Text = "Vui lòng chọn sản phẩm cần xóa.";
+                lab_thongBao.ForeColor = Color.Red;
+                lab_thongBao.Visible = true;
+                return;
+            }
+
+            GioHang.RemoveAll(x => maSPCTCanXoa.Contains(x.MaSPCT));
+
+            LoadGioHang();
+
+            lab_thongBao.Text = $"Đã xóa {maSPCTCanXoa.Count} sản phẩm khỏi giỏ hàng.";
+            lab_thongBao.ForeColor = Color.Green;
+            lab_thongBao.Visible = true;
+            if(GioHang.Count == 0)
+            {
+                daApDungVoucher = false;
             }
         }
 

@@ -178,7 +178,6 @@
             dtg_gioHang.Cursor = Cursors.Hand;
             dtg_gioHang.Location = new Point(738, 345);
             dtg_gioHang.Name = "dtg_gioHang";
-            dtg_gioHang.ReadOnly = true;
             dtg_gioHang.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dtg_gioHang.Size = new Size(595, 150);
             dtg_gioHang.TabIndex = 7;
@@ -298,9 +297,11 @@
             num_soLuong.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             num_soLuong.ForeColor = Color.Yellow;
             num_soLuong.Location = new Point(869, 88);
+            num_soLuong.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             num_soLuong.Name = "num_soLuong";
             num_soLuong.Size = new Size(181, 19);
             num_soLuong.TabIndex = 19;
+            num_soLuong.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // lab_tenSanPham
             // 

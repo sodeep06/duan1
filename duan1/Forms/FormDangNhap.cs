@@ -60,13 +60,13 @@ namespace duan1.Forms
             }
             else if (nv == null)
             {
-                lab_thongBao.Text = "Tai khoan khong ton tai!";
+                lab_thongBao.Text = "Tài khoản không tồn tại!";
                 lab_thongBao.ForeColor = Color.Red;
             }
             else
             {
                 var mk = nv.MatKhau;
-                lab_thongBao.Text = $"Mat khau phai la: {mk}";
+                lab_thongBao.Text = $"Mật khẩu phải là: {mk}";
                 lab_thongBao.ForeColor = Color.Red;
             }
         }

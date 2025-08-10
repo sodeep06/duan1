@@ -56,63 +56,72 @@
             // 
             // dgvSanPham
             // 
+            dgvSanPham.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvSanPham.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvSanPham.Location = new Point(634, 45);
+            dgvSanPham.Location = new Point(555, 34);
+            dgvSanPham.Margin = new Padding(3, 2, 3, 2);
             dgvSanPham.Name = "dgvSanPham";
             dgvSanPham.RowHeadersWidth = 51;
-            dgvSanPham.Size = new Size(987, 660);
+            dgvSanPham.Size = new Size(580, 495);
             dgvSanPham.TabIndex = 0;
             dgvSanPham.CellClick += dgvSanPham_CellClick;
             // 
             // txtMaSP
             // 
-            txtMaSP.Location = new Point(102, 344);
+            txtMaSP.Location = new Point(89, 258);
+            txtMaSP.Margin = new Padding(3, 2, 3, 2);
             txtMaSP.Name = "txtMaSP";
-            txtMaSP.Size = new Size(180, 27);
+            txtMaSP.Size = new Size(158, 23);
             txtMaSP.TabIndex = 1;
             // 
             // txtTenSP
             // 
-            txtTenSP.Location = new Point(102, 302);
+            txtTenSP.Location = new Point(89, 226);
+            txtTenSP.Margin = new Padding(3, 2, 3, 2);
             txtTenSP.Name = "txtTenSP";
-            txtTenSP.Size = new Size(180, 27);
+            txtTenSP.Size = new Size(158, 23);
             txtTenSP.TabIndex = 2;
             // 
             // txtGiaBan
             // 
-            txtGiaBan.Location = new Point(102, 466);
+            txtGiaBan.Location = new Point(89, 350);
+            txtGiaBan.Margin = new Padding(3, 2, 3, 2);
             txtGiaBan.Name = "txtGiaBan";
-            txtGiaBan.Size = new Size(180, 27);
+            txtGiaBan.Size = new Size(158, 23);
             txtGiaBan.TabIndex = 3;
             // 
             // txtSoLuong
             // 
-            txtSoLuong.Location = new Point(102, 387);
+            txtSoLuong.Location = new Point(89, 290);
+            txtSoLuong.Margin = new Padding(3, 2, 3, 2);
             txtSoLuong.Name = "txtSoLuong";
-            txtSoLuong.Size = new Size(180, 27);
+            txtSoLuong.Size = new Size(158, 23);
             txtSoLuong.TabIndex = 4;
             // 
             // txtMoTa
             // 
-            txtMoTa.Location = new Point(102, 426);
+            txtMoTa.Location = new Point(89, 320);
+            txtMoTa.Margin = new Padding(3, 2, 3, 2);
             txtMoTa.Name = "txtMoTa";
-            txtMoTa.Size = new Size(180, 27);
+            txtMoTa.Size = new Size(158, 23);
             txtMoTa.TabIndex = 5;
             // 
             // cbDanhMuc
             // 
             cbDanhMuc.FormattingEnabled = true;
-            cbDanhMuc.Location = new Point(102, 503);
+            cbDanhMuc.Location = new Point(89, 377);
+            cbDanhMuc.Margin = new Padding(3, 2, 3, 2);
             cbDanhMuc.Name = "cbDanhMuc";
-            cbDanhMuc.Size = new Size(180, 28);
+            cbDanhMuc.Size = new Size(158, 23);
             cbDanhMuc.TabIndex = 6;
             cbDanhMuc.SelectedIndexChanged += cbDanhMuc_SelectedIndexChanged;
             // 
             // btnThem
             // 
-            btnThem.Location = new Point(471, 370);
+            btnThem.Location = new Point(412, 278);
+            btnThem.Margin = new Padding(3, 2, 3, 2);
             btnThem.Name = "btnThem";
-            btnThem.Size = new Size(94, 29);
+            btnThem.Size = new Size(82, 22);
             btnThem.TabIndex = 7;
             btnThem.Text = "Them";
             btnThem.UseVisualStyleBackColor = true;
@@ -120,9 +129,10 @@
             // 
             // btnSua
             // 
-            btnSua.Location = new Point(471, 483);
+            btnSua.Location = new Point(412, 362);
+            btnSua.Margin = new Padding(3, 2, 3, 2);
             btnSua.Name = "btnSua";
-            btnSua.Size = new Size(94, 29);
+            btnSua.Size = new Size(82, 22);
             btnSua.TabIndex = 8;
             btnSua.Text = "Sua";
             btnSua.UseVisualStyleBackColor = true;
@@ -130,9 +140,10 @@
             // 
             // btnXoa
             // 
-            btnXoa.Location = new Point(471, 429);
+            btnXoa.Location = new Point(412, 322);
+            btnXoa.Margin = new Padding(3, 2, 3, 2);
             btnXoa.Name = "btnXoa";
-            btnXoa.Size = new Size(94, 29);
+            btnXoa.Size = new Size(82, 22);
             btnXoa.TabIndex = 9;
             btnXoa.Text = "Xoa";
             btnXoa.UseVisualStyleBackColor = true;
@@ -140,9 +151,10 @@
             // 
             // btnLamMoi
             // 
-            btnLamMoi.Location = new Point(471, 317);
+            btnLamMoi.Location = new Point(412, 238);
+            btnLamMoi.Margin = new Padding(3, 2, 3, 2);
             btnLamMoi.Name = "btnLamMoi";
-            btnLamMoi.Size = new Size(94, 29);
+            btnLamMoi.Size = new Size(82, 22);
             btnLamMoi.TabIndex = 10;
             btnLamMoi.Text = "F5";
             btnLamMoi.UseVisualStyleBackColor = true;
@@ -151,9 +163,9 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(12, 347);
+            label1.Location = new Point(10, 260);
             label1.Name = "label1";
-            label1.Size = new Size(46, 20);
+            label1.Size = new Size(37, 15);
             label1.TabIndex = 11;
             label1.Text = "MaSP";
             label1.Click += label1_Click;
@@ -161,78 +173,84 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(12, 390);
+            label2.Location = new Point(10, 292);
             label2.Name = "label2";
-            label2.Size = new Size(67, 20);
+            label2.Size = new Size(54, 15);
             label2.TabIndex = 12;
             label2.Text = "SoLuong";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(12, 309);
+            label3.Location = new Point(10, 232);
             label3.Name = "label3";
-            label3.Size = new Size(32, 20);
+            label3.Size = new Size(25, 15);
             label3.TabIndex = 13;
             label3.Text = "Ten";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(12, 429);
+            label4.Location = new Point(10, 322);
             label4.Name = "label4";
-            label4.Size = new Size(45, 20);
+            label4.Size = new Size(36, 15);
             label4.TabIndex = 14;
             label4.Text = "MoTa";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(15, 469);
+            label5.Location = new Point(13, 352);
             label5.Name = "label5";
-            label5.Size = new Size(31, 20);
+            label5.Size = new Size(24, 15);
             label5.TabIndex = 15;
             label5.Text = "Gia";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(15, 503);
+            label6.Location = new Point(13, 377);
             label6.Name = "label6";
-            label6.Size = new Size(76, 20);
+            label6.Size = new Size(62, 15);
             label6.TabIndex = 16;
             label6.Text = "Danh Muc";
             // 
             // picHinhAnh
             // 
-            picHinhAnh.Location = new Point(55, 19);
+            picHinhAnh.Location = new Point(48, 14);
+            picHinhAnh.Margin = new Padding(3, 2, 3, 2);
             picHinhAnh.Name = "picHinhAnh";
-            picHinhAnh.Size = new Size(510, 270);
+            picHinhAnh.Size = new Size(446, 202);
             picHinhAnh.TabIndex = 17;
             picHinhAnh.TabStop = false;
             // 
             // btnChonAnh
             // 
-            btnChonAnh.Location = new Point(577, 10);
+            btnChonAnh.BackColor = SystemColors.AppWorkspace;
+            btnChonAnh.FlatStyle = FlatStyle.Flat;
+            btnChonAnh.Location = new Point(89, 416);
+            btnChonAnh.Margin = new Padding(3, 2, 3, 2);
             btnChonAnh.Name = "btnChonAnh";
-            btnChonAnh.Size = new Size(94, 29);
+            btnChonAnh.Size = new Size(82, 54);
             btnChonAnh.TabIndex = 18;
-            btnChonAnh.Text = "Them anh";
-            btnChonAnh.UseVisualStyleBackColor = true;
+            btnChonAnh.Text = "Thêm hình ảnh";
+            btnChonAnh.UseVisualStyleBackColor = false;
             btnChonAnh.Click += btnChonAnh_Click;
             // 
             // txtTimKiem
             // 
-            txtTimKiem.Location = new Point(755, 12);
+            txtTimKiem.Location = new Point(661, 9);
+            txtTimKiem.Margin = new Padding(3, 2, 3, 2);
             txtTimKiem.Name = "txtTimKiem";
-            txtTimKiem.Size = new Size(125, 27);
+            txtTimKiem.Size = new Size(213, 23);
             txtTimKiem.TabIndex = 19;
             // 
             // btnTimKiem
             // 
-            btnTimKiem.Location = new Point(886, 10);
+            btnTimKiem.Location = new Point(880, 10);
+            btnTimKiem.Margin = new Padding(3, 2, 3, 2);
             btnTimKiem.Name = "btnTimKiem";
-            btnTimKiem.Size = new Size(94, 29);
+            btnTimKiem.Size = new Size(82, 22);
             btnTimKiem.TabIndex = 20;
             btnTimKiem.Text = "Tim`";
             btnTimKiem.UseVisualStyleBackColor = true;
@@ -242,17 +260,17 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(677, 15);
+            label7.Location = new Point(592, 11);
             label7.Name = "label7";
-            label7.Size = new Size(72, 20);
+            label7.Size = new Size(57, 15);
             label7.TabIndex = 21;
             label7.Text = "Tim Kiem";
             // 
             // FormSanPham
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1633, 717);
+            ClientSize = new Size(1429, 538);
             Controls.Add(label7);
             Controls.Add(btnTimKiem);
             Controls.Add(txtTimKiem);
@@ -275,6 +293,7 @@
             Controls.Add(txtTenSP);
             Controls.Add(txtMaSP);
             Controls.Add(dgvSanPham);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "FormSanPham";
             Text = "FormSanPham";
             Load += FormSanPham_Load;

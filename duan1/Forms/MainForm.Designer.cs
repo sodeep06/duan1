@@ -86,7 +86,7 @@
             panel1.Location = new Point(167, 68);
             panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1238, 474);
+            panel1.Size = new Size(1191, 474);
             panel1.TabIndex = 5;
             // 
             // btnNhanVien
