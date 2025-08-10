@@ -81,5 +81,10 @@ namespace duan1.Forms
         {
             ChangForm(new FormQLVoucher());
         }
+
+        private void btn_hoaDon_Click(object sender, EventArgs e)
+        {
+            ChangForm(new FormHoaDon());
+        }
     }
 }

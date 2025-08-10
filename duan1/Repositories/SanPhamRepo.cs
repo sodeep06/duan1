@@ -24,7 +24,16 @@ namespace duan1.Repositories
                 .Include(sp => sp.ChiTietSanPhams)
                 .ToList();
         }
+        public List<SanPham> GetSanPhamHopLe()
+        {
+            var query = _context.SanPhams
+         .Where(sp => sp.ChiTietSanPhams.Sum(ct => ct.SoLuongTon) > 0)
+         .Include(sp => sp.DanhMuc)
+         .Include(sp => sp.ChiTietSanPhams);
 
+            return query.ToList();
+
+        }
         public SanPham GetById(string id)
         {
             return _context.SanPhams.Find(id);
@@ -51,5 +60,38 @@ namespace duan1.Repositories
                 _context.SaveChanges();
             }
         }
+        public bool TruTonKho(string maSPCT, int soLuong)
+        {
+            var ctsp = _context.ChiTietSanPhams.FirstOrDefault(x => x.MaSPCT == maSPCT);
+            if (ctsp == null || ctsp.SoLuongTon < soLuong)
+            {
+                return false;
+            }
+
+            var sp = _context.SanPhams.Find(ctsp.MaSP);
+            if (sp == null || sp.SoLuong < soLuong)
+            {
+                return false;
+            }
+
+            ctsp.SoLuongTon -= soLuong;
+            if (ctsp.SoLuongTon == 0)
+            {
+                _context.ChiTietSanPhams.Remove(ctsp);
+
+            }
+            else
+            {
+                _context.ChiTietSanPhams.Update(ctsp);
+            }
+
+            sp.SoLuong -= soLuong;
+            _context.SanPhams.Update(sp);
+
+            _context.SaveChanges();
+
+            return true;
+        }
+
     }
 }
