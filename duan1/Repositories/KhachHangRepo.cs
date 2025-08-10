@@ -31,7 +31,8 @@ namespace duan1.Repositories
         }
         public void Delete (string id)
         {
-            _context.Remove(id);
+            var kh = _context.KhachHangs.Find(id);
+            _context.Remove(kh);
             _context.SaveChanges();
         }
     }

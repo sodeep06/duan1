@@ -33,80 +33,97 @@
             btnDangNhap = new Button();
             label1 = new Label();
             label2 = new Label();
-            label3 = new Label();
             lab_thongBao = new Label();
+            lab_login = new Label();
             SuspendLayout();
             // 
             // txtEmail
             // 
-            txtEmail.Location = new Point(95, 61);
+            txtEmail.BackColor = SystemColors.Control;
+            txtEmail.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold);
+            txtEmail.Location = new Point(104, 65);
             txtEmail.Margin = new Padding(3, 2, 3, 2);
             txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(209, 23);
+            txtEmail.Size = new Size(209, 22);
             txtEmail.TabIndex = 0;
             // 
             // txtMatKhau
             // 
-            txtMatKhau.Location = new Point(95, 99);
+            txtMatKhau.BackColor = SystemColors.Control;
+            txtMatKhau.Font = new Font("Segoe UI Semibold", 8.25F, FontStyle.Bold);
+            txtMatKhau.Location = new Point(104, 103);
             txtMatKhau.Margin = new Padding(3, 2, 3, 2);
             txtMatKhau.Name = "txtMatKhau";
-            txtMatKhau.Size = new Size(209, 23);
+            txtMatKhau.PasswordChar = '-';
+            txtMatKhau.Size = new Size(209, 22);
             txtMatKhau.TabIndex = 1;
             // 
             // btnDangNhap
             // 
-            btnDangNhap.Location = new Point(118, 136);
+            btnDangNhap.BackColor = Color.DimGray;
+            btnDangNhap.FlatStyle = FlatStyle.Flat;
+            btnDangNhap.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnDangNhap.ForeColor = Color.WhiteSmoke;
+            btnDangNhap.Location = new Point(104, 131);
             btnDangNhap.Margin = new Padding(3, 2, 3, 2);
             btnDangNhap.Name = "btnDangNhap";
-            btnDangNhap.Size = new Size(134, 25);
+            btnDangNhap.Size = new Size(101, 31);
             btnDangNhap.TabIndex = 2;
-            btnDangNhap.Text = "Dang Nhap";
-            btnDangNhap.UseVisualStyleBackColor = true;
+            btnDangNhap.Text = "Đăng nhập";
+            btnDangNhap.UseVisualStyleBackColor = false;
             btnDangNhap.Click += btnDangNhap_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(22, 69);
+            label1.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            label1.ForeColor = Color.Black;
+            label1.Location = new Point(31, 67);
             label1.Name = "label1";
-            label1.Size = new Size(36, 15);
+            label1.Size = new Size(42, 17);
             label1.TabIndex = 3;
             label1.Text = "Email";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(22, 105);
+            label2.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold);
+            label2.ForeColor = Color.Black;
+            label2.Location = new Point(31, 103);
             label2.Name = "label2";
-            label2.Size = new Size(57, 15);
+            label2.Size = new Size(66, 17);
             label2.TabIndex = 4;
             label2.Text = "Mat khau";
             // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(118, 21);
-            label3.Name = "label3";
-            label3.Size = new Size(129, 20);
-            label3.TabIndex = 5;
-            label3.Text = "SHOP Giay Piapia";
-            // 
             // lab_thongBao
             // 
-            lab_thongBao.Location = new Point(22, 178);
+            lab_thongBao.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lab_thongBao.Location = new Point(22, 181);
             lab_thongBao.Name = "lab_thongBao";
             lab_thongBao.Size = new Size(339, 23);
             lab_thongBao.TabIndex = 6;
             lab_thongBao.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // lab_login
+            // 
+            lab_login.AutoSize = true;
+            lab_login.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            lab_login.ForeColor = Color.Maroon;
+            lab_login.Location = new Point(31, 19);
+            lab_login.Name = "lab_login";
+            lab_login.Size = new Size(318, 25);
+            lab_login.TabIndex = 7;
+            lab_login.Text = "Vui lòng đăng nhập vào hệ thống...";
+            lab_login.Click += lab_login_Click;
+            // 
             // FormDangNhap
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.Control;
             ClientSize = new Size(373, 213);
+            Controls.Add(lab_login);
             Controls.Add(lab_thongBao);
-            Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(btnDangNhap);
@@ -114,6 +131,7 @@
             Controls.Add(txtEmail);
             Margin = new Padding(3, 2, 3, 2);
             Name = "FormDangNhap";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "FormDangNhap";
             ResumeLayout(false);
             PerformLayout();
@@ -126,7 +144,7 @@
         private Button btnDangNhap;
         private Label label1;
         private Label label2;
-        private Label label3;
         private Label lab_thongBao;
+        private Label lab_login;
     }
 }

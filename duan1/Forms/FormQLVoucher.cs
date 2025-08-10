@@ -1,4 +1,5 @@
 ﻿using duan1.Models;
+using duan1.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,37 +14,24 @@ namespace duan1.Forms
 {
     public partial class FormQLVoucher : Form
     {
+        VoucherRepo _repo = new VoucherRepo();
         public FormQLVoucher()
         {
             InitializeComponent();
             LoadData();
             dgvVoucher.SelectionChanged += dgvVoucher_SelectionChanged;
         }
-
+        
         private void LoadData()
         {
-            using (var context = new ShopDbContext())
-            {
-                var data = context.Vouchers
-                    .Select(v => new
-                    {
-                        MaVoucher = v.MaVoucher,
-                        TenVoucher = v.TenVoucher,
-                        GiaTri = v.GiaTri,
-                        NgayBatDau = v.NgayBatDau,
-                        NgayKetThuc = v.NgayKetThuc
-                    })
-                    .ToList();
+            dgvVoucher.DataSource = _repo.GetValidVouchers();
 
-                dgvVoucher.DataSource = data;
-
-                // Đặt lại header nếu cần (tùy chỉnh giao diện)
+            // Đặt lại header nếu cần (tùy chỉnh giao diện)
                 dgvVoucher.Columns["MaVoucher"].HeaderText = "Mã Voucher";
                 dgvVoucher.Columns["TenVoucher"].HeaderText = "Tên Voucher";
                 dgvVoucher.Columns["GiaTri"].HeaderText = "Giá Trị";
                 dgvVoucher.Columns["NgayBatDau"].HeaderText = "Ngày Bắt Đầu";
                 dgvVoucher.Columns["NgayKetThuc"].HeaderText = "Ngày Kết Thúc";
-            }
         }
 
         private void ClearFields()

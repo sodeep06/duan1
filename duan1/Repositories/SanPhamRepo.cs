@@ -4,35 +4,52 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace duan1.Repositories
 {
     public class SanPhamRepo
     {
-        ShopDbContext _context = new ShopDbContext();
+        private ShopDbContext _context = new ShopDbContext();
 
         public List<SanPham> GetAll()
         {
             return _context.SanPhams.ToList();
         }
+
+        public List<SanPham> GetAllWithDetails()
+        {
+            return _context.SanPhams
+                .Include(sp => sp.DanhMuc)
+                .Include(sp => sp.ChiTietSanPhams)
+                .ToList();
+        }
+
         public SanPham GetById(string id)
         {
             return _context.SanPhams.Find(id);
         }
-        public void Add(SanPham sanPham)
+
+        public void Add(SanPham sp)
         {
-            _context.Add(sanPham);
+            _context.SanPhams.Add(sp);
             _context.SaveChanges();
         }
-        public void Update(SanPham sanPham)
+
+        public void Update(SanPham sp)
         {
-            _context.Update(sanPham);
+            _context.SanPhams.Update(sp);
             _context.SaveChanges();
         }
+
         public void Delete(string id)
         {
-            _context.Remove(id);
-            _context.SaveChanges();
+            var sp = _context.SanPhams.Find(id);
+            if (sp != null)
+            {
+                _context.SanPhams.Remove(sp);
+                _context.SaveChanges();
+            }
         }
     }
 }

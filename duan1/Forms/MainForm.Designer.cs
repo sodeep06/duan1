@@ -36,24 +36,24 @@
             btnNhanVien = new Button();
             btnVoucher = new Button();
             btn_qlyNhanVien = new Button();
+            btn_qlyVoucher = new Button();
             SuspendLayout();
             // 
             // lblChaoMung
             // 
             lblChaoMung.AutoSize = true;
-            lblChaoMung.Location = new Point(553, 68);
-            lblChaoMung.Margin = new Padding(6, 0, 6, 0);
+            lblChaoMung.Location = new Point(298, 32);
             lblChaoMung.Name = "lblChaoMung";
-            lblChaoMung.Size = new Size(113, 32);
+            lblChaoMung.Size = new Size(57, 15);
             lblChaoMung.TabIndex = 0;
             lblChaoMung.Text = "Welcome";
             // 
             // btnSanPham
             // 
-            btnSanPham.Location = new Point(19, 143);
-            btnSanPham.Margin = new Padding(6, 4, 6, 4);
+            btnSanPham.Location = new Point(10, 67);
+            btnSanPham.Margin = new Padding(3, 2, 3, 2);
             btnSanPham.Name = "btnSanPham";
-            btnSanPham.Size = new Size(247, 111);
+            btnSanPham.Size = new Size(133, 52);
             btnSanPham.TabIndex = 1;
             btnSanPham.Text = "SanPham";
             btnSanPham.UseVisualStyleBackColor = true;
@@ -61,30 +61,30 @@
             // 
             // btnBanHang
             // 
-            btnBanHang.Location = new Point(19, 265);
-            btnBanHang.Margin = new Padding(6, 4, 6, 4);
+            btnBanHang.Location = new Point(10, 124);
+            btnBanHang.Margin = new Padding(3, 2, 3, 2);
             btnBanHang.Name = "btnBanHang";
-            btnBanHang.Size = new Size(247, 111);
+            btnBanHang.Size = new Size(133, 52);
             btnBanHang.TabIndex = 2;
             btnBanHang.Text = "BanHang";
             btnBanHang.UseVisualStyleBackColor = true;
             // 
             // btnThongKe
             // 
-            btnThongKe.Location = new Point(19, 508);
-            btnThongKe.Margin = new Padding(6, 4, 6, 4);
+            btnThongKe.Location = new Point(10, 238);
+            btnThongKe.Margin = new Padding(3, 2, 3, 2);
             btnThongKe.Name = "btnThongKe";
-            btnThongKe.Size = new Size(247, 111);
+            btnThongKe.Size = new Size(133, 52);
             btnThongKe.TabIndex = 4;
             btnThongKe.Text = "ThongKe";
             btnThongKe.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
-            panel1.Location = new Point(310, 145);
-            panel1.Margin = new Padding(6, 4, 6, 4);
+            panel1.Location = new Point(167, 68);
+            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(2299, 1011);
+            panel1.Size = new Size(1238, 474);
             panel1.TabIndex = 5;
             // 
             // btnNhanVien
@@ -107,25 +107,39 @@
             // 
             // btn_qlyNhanVien
             // 
-            btn_qlyNhanVien.Location = new Point(19, 383);
+            btn_qlyNhanVien.Location = new Point(10, 180);
+            btn_qlyNhanVien.Margin = new Padding(2, 1, 2, 1);
             btn_qlyNhanVien.Name = "btn_qlyNhanVien";
-            btn_qlyNhanVien.Size = new Size(247, 118);
+            btn_qlyNhanVien.Size = new Size(133, 55);
             btn_qlyNhanVien.TabIndex = 0;
             btn_qlyNhanVien.Text = "Quan ly nhan vien";
             btn_qlyNhanVien.UseVisualStyleBackColor = true;
+            btn_qlyNhanVien.Click += btn_qlyNhanVien_Click;
+            // 
+            // btn_qlyVoucher
+            // 
+            btn_qlyVoucher.Location = new Point(10, 294);
+            btn_qlyVoucher.Margin = new Padding(3, 2, 3, 2);
+            btn_qlyVoucher.Name = "btn_qlyVoucher";
+            btn_qlyVoucher.Size = new Size(133, 52);
+            btn_qlyVoucher.TabIndex = 6;
+            btn_qlyVoucher.Text = "Voucher";
+            btn_qlyVoucher.UseVisualStyleBackColor = true;
+            btn_qlyVoucher.Click += btn_qlyVoucher_Click;
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(13F, 32F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(2884, 1523);
+            ClientSize = new Size(738, 351);
+            Controls.Add(btn_qlyVoucher);
             Controls.Add(btn_qlyNhanVien);
             Controls.Add(panel1);
             Controls.Add(btnThongKe);
             Controls.Add(btnBanHang);
             Controls.Add(btnSanPham);
             Controls.Add(lblChaoMung);
-            Margin = new Padding(6, 4, 6, 4);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "MainForm";
             Text = "MainForm";
             WindowState = FormWindowState.Maximized;
@@ -143,5 +157,6 @@
         private Button btnNhanVien;
         private Button btnVoucher;
         private Button btn_qlyNhanVien;
+        private Button btn_qlyVoucher;
     }
 }
