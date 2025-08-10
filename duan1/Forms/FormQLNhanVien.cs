@@ -195,5 +195,10 @@ namespace duan1.Forms
 
             dgvNhanVien.DataSource = filteredList;
         }
+
+        private void FormQLNhanVien_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
