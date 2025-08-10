@@ -1,4 +1,5 @@
-﻿using duan1.Models;
+﻿using duan1.DTO;
+using duan1.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -30,10 +31,15 @@ namespace duan1.Repositories
             return _context.DonHangs.Find(id);
         }
 
-        public void Add(DonHang dh)
+        public bool Add(DonHang dh)
         {
+            if(dh == null || string.IsNullOrEmpty(dh.MaDH))
+            {
+                return false;
+            }
             _context.DonHangs.Add(dh);
             _context.SaveChanges();
+            return true; 
         }
 
         public void Update(DonHang dh)

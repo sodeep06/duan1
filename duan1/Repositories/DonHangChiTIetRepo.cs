@@ -28,10 +28,20 @@ namespace duan1.Repositories
             return _context.DonHangChiTiets.Find(id);
         }
 
-        public void Add(DonHangChiTiet dhct)
+        public bool Add(DonHangChiTiet dhct)
         {
+            if(dhct == null || string.IsNullOrEmpty(dhct.MaDHCT))
+            {
+                return false;
+            }
+            if (dhct.SoLuong <= 0 || dhct.DonGia <= 0)
+            {
+                return false;
+            }
+
             _context.DonHangChiTiets.Add(dhct);
             _context.SaveChanges();
+            return true;
         }
 
         public void Update(DonHangChiTiet dhct)

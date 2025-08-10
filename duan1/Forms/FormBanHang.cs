@@ -17,8 +17,8 @@ namespace duan1.Forms
     {
         SanPhamRepo sprepo = new SanPhamRepo();
         KhachHangRepo khrepo = new KhachHangRepo();
-        List<SanPhamTrongGioHangDTO> gioHang = new List<SanPhamTrongGioHangDTO>();
-        List<DonHangChiTietDTO> GioHang = new List<DonHangChiTietDTO>();
+        List<DonHangChiTietDTO> gioHang = new List<DonHangChiTietDTO>();
+        List<DonHangChiTiet> GioHang = new List<DonHangChiTiet>();
         DonHangChiTietRepo dhctRepo = new DonHangChiTietRepo();
         DonHangRepo dhRepo = new DonHangRepo();
         VoucherRepo vRepo = new VoucherRepo();
@@ -62,20 +62,21 @@ namespace duan1.Forms
         }
         private void LoadGioHang()
         {
+            var spList = sprepo.GetAll();
             dtg_gioHang.DataSource = null;
             dtg_gioHang.DataSource = GioHang.Select(x => new
             {
-                x.TenSanPham,
+                TenSanPham = spList.FirstOrDefault(sp => sp.MaSP == x.MaSPCT)?.TenSP ?? "Không tìm thấy",
                 x.DonGia,
                 x.SoLuong,
-                x.ThanhTien
+                ThanhTien = x.DonGia * x.SoLuong,
             }
             ).ToList();
             dtg_gioHang.Columns["TenSanPham"].HeaderText = "Tên sản phẩm";
             dtg_gioHang.Columns["DonGia"].HeaderText = "Đơn giá";
             dtg_gioHang.Columns["SoLuong"].HeaderText = "Số lượng";
             dtg_gioHang.Columns["ThanhTien"].HeaderText = "Thành tiền";
-            txt_tongTien.Text = GioHang.Sum(x => x.ThanhTien).ToString("N0");
+            txt_tongTien.Text = GioHang.Sum(x => (x.DonGia * x.SoLuong)).ToString("N0");
 
         }
         private void LoadData()
@@ -146,17 +147,17 @@ namespace duan1.Forms
             }
             else
             {
-                GioHang.Add(new DonHangChiTietDTO
+                var dhct = new DonHangChiTiet
                 {
-                    MaSPCT = lab_maSanPham.Text,
-                    MaDH = Guid.NewGuid().ToString(),
                     MaDHCT = Guid.NewGuid().ToString(),
-                    SoLuong = (int)num_soLuong.Value,
+                    MaDH = string.Empty,
+                    MaSPCT = lab_maSanPham.Text,
                     DonGia = decimal.Parse(lab_donGia.Text),
-                    TenSanPham = lab_tenSanPham.Text
-                });
+                    SoLuong = (int)num_soLuong.Value,
+                };
+                GioHang.Add(dhct);
                 LoadGioHang();
-
+                ClearInputFields();
             }
         }
         private void ClearInputFields()
@@ -166,6 +167,9 @@ namespace duan1.Forms
             lab_tenKhachHang.Text = string.Empty;
             num_soLuong.Value = 0;
             lab_soLuongTon.Text = string.Empty;
+            lab_maSanPham.Text = string.Empty;
+            lab_thongBao.Text = string.Empty;
+            lab_maKhachHang.Text = string.Empty;
         }
         string maSp = string.Empty;
         private void dtg_sanPham_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -210,18 +214,38 @@ namespace duan1.Forms
                 lab_thongBao.Visible = true;
                 return;
             }
-
-            DonHangDTO dh = new DonHangDTO
+            string maDh = Guid.NewGuid().ToString();
+            DonHang dh = new DonHang
             {
-                MaDH = Guid.NewGuid().ToString(),
+                MaDH = maDh,
                 NgayDat = DateTime.Now,
-                TongTien = GioHang.Sum(x => x.ThanhTien),
+                TongTien = decimal.Parse(txt_tongTien.Text),
                 TrangThai = "Chờ xử lý",
                 MaKH = lab_maKhachHang.Text,
                 MaNV = PhienDangNhap.MaNV,
                 MaVoucher = txt_voucher.Text.Trim()
             };
-
+            bool isSuccess = dhRepo.Add(dh);
+            if(isSuccess != true)
+            {
+                lab_thongBao.Text = "Lỗi khi tạo đơn hàng. Vui lòng thử lại.";
+            }
+            foreach (var item in GioHang)
+            {
+                item.MaDH = maDh;
+                bool isAdded = dhctRepo.Add(item);
+                if (!isAdded)
+                {
+                    lab_thongBao.Text = "Lỗi khi thêm sản phẩm vào đơn hàng. Vui lòng thử lại.";
+                    return;
+                }
+                sprepo.TruTonKho(item.MaSPCT, item.SoLuong);
+                lab_thongBao.Text = "Thanh toán thành công!";
+                lab_thongBao.ForeColor = Color.Green;
+                LoadData();
+                ClearInputFields();
+                daApDungVoucher = false;
+            }
         }
 
         private void btn_apDungVoucher_Click(object sender, EventArgs e)
@@ -235,12 +259,14 @@ namespace duan1.Forms
             }
             tongTien = decimal.Parse(txt_tongTien.Text);
             var validVoucher = vRepo.GetValidVouchers()
-                            .Where(x => x.MaVoucher == txt_voucher.Text.Trim())
+                            .Where(x => x.MaVoucher.ToLower() == txt_voucher.Text.Trim().ToLower())
                             .FirstOrDefault();
             if (validVoucher != null)
             {
-                var giaTriGiam = validVoucher.GiaTri;
-                txt_tongTien.Text = (tongTien * giaTriGiam / 100).ToString("N0");
+                var giaTriGiam = tongTien * validVoucher.GiaTri / 100;
+                txt_tongTien.Text = (tongTien - giaTriGiam).ToString("N0");
+                lab_thongBao.Text = "Voucher đã được áp dụng thành công!";
+                lab_thongBao.ForeColor = Color.Green;
                 daApDungVoucher = true;
 
             }
@@ -250,7 +276,7 @@ namespace duan1.Forms
         {
             try
             {
-                var validVoucher = vRepo.GetValidVouchers().FirstOrDefault(x => x.MaVoucher == txt_voucher.Text.Trim());
+                var validVoucher = vRepo.GetValidVouchers().FirstOrDefault(x => x.MaVoucher.ToLower() == txt_voucher.Text.Trim().ToLower());
                 if (validVoucher != null)
                 {
                     lab_tenVoucher.Text = validVoucher.TenVoucher;

@@ -51,5 +51,16 @@ namespace duan1.Repositories
                 _context.SaveChanges();
             }
         }
+        public bool TruTonKho(string maSP, int soLuong)
+        {
+            var sp = GetById(maSP);
+            if(sp == null || sp.SoLuong < soLuong)
+            {
+                return false;
+            }
+            sp.SoLuong -= soLuong;
+            _context.SanPhams.Update(sp);
+            return true;
+        }
     }
 }
