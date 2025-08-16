@@ -14,7 +14,7 @@ namespace duan1.Models
         public string TrangThai { get; set; }
         public string MaKH { get; set; }
         public string MaNV { get; set; }
-        public string? MaVoucher { get; set; }  // CHO PHÉP NULL
+        public string? MaVoucher { get; set; }  
 
         [ForeignKey("MaKH")]
         public virtual KhachHang KhachHang { get; set; }

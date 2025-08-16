@@ -1,119 +1,87 @@
-﻿using duan1.DTO;
-using duan1.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿using System.Windows.Forms;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using duan1.DTO;
+using duan1.Models;
 
 namespace duan1.Forms
 {
     public partial class FormDangNhap : Form
     {
         ShopDbContext db = new ShopDbContext();
+
         public FormDangNhap()
         {
             InitializeComponent();
         }
+
         private void ClearInputFields()
         {
             txtEmail.Text = string.Empty;
             txtMatKhau.Text = string.Empty;
-            lab_thongBao.Text = string.Empty;
         }
-        private void btnDangNhap_Click(object sender, EventArgs e)
+
+        // Gọi từ cả 2 sự kiện
+        private void DoLogin(bool openModally)
         {
             string email = txtEmail.Text.Trim();
             string matkhau = txtMatKhau.Text.Trim();
 
-            var nv = db.NhanViens.FirstOrDefault(x => x.Email == email);
-            if (nv != null && matkhau == nv.MatKhau)
+            // Kiểm tra rỗng
+            if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(matkhau))
             {
-                PhienDangNhap.MaNV = nv.MaNV;
-                PhienDangNhap.HoTen = nv.HoTen;
-                PhienDangNhap.Email = nv.Email;
-                PhienDangNhap.VaiTro = nv.VaiTro;
-
-                lab_thongBao.Text = "Dang nhap thanh cong...";
-                lab_thongBao.ForeColor = Color.Green;
-                if (nv.VaiTro == "QL")
-                {
-                    // vai tro QL -> mo main form
-                    this.Hide();
-                    MainForm f = new MainForm(nv);
-                    f.FormClosed += (s, args) => this.Show();
-                    f.Show();
-                }
-                else
-                {
-                    // vai tro nhan vien -> mo ban hang
-                    this.Hide();
-                    FormBanHang f = new FormBanHang();
-                    f.FormClosed += (s, args) => this.Show();
-                    f.Show();
-                }
-                ClearInputFields();
+                MessageBox.Show("Vui lòng nhập đầy đủ Email và Mật khẩu.",
+                                "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-            else if (nv == null)
+
+            var nv = db.NhanViens.FirstOrDefault(x => x.Email == email);
+
+            // Sai email hoặc mật khẩu
+            if (nv == null || nv.MatKhau != matkhau)
             {
-                lab_thongBao.Text = "Tai khoan khong ton tai!";
-                lab_thongBao.ForeColor = Color.Red;
+                MessageBox.Show("Email hoặc mật khẩu không đúng.",
+                                "Đăng nhập thất bại", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtMatKhau.Focus();
+                txtMatKhau.SelectAll();
+                return;
+            }
+
+            // Thành công
+            MessageBox.Show($"Xin chào {nv.HoTen}!\nĐăng nhập thành công.",
+                            "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            // Lưu phiên
+            PhienDangNhap.MaNV = nv.MaNV;
+            PhienDangNhap.HoTen = nv.HoTen;
+            PhienDangNhap.Email = nv.Email;
+            PhienDangNhap.VaiTro = nv.VaiTro;
+
+            // Mở form theo vai trò
+            this.Hide();
+            if (nv.VaiTro == "QL")
+            {
+                var f = new MainForm(nv);
+                if (openModally) { f.ShowDialog(); this.Close(); }
+                else { f.FormClosed += (s, args) => this.Show(); f.Show(); }
             }
             else
             {
-                var mk = nv.MatKhau;
-                lab_thongBao.Text = $"Mat khau phai la: {mk}";
-                lab_thongBao.ForeColor = Color.Red;
+                var f = new FormBanHang();
+                if (openModally) { f.ShowDialog(); this.Close(); }
+                else { f.FormClosed += (s, args) => this.Show(); f.Show(); }
             }
+
+            ClearInputFields();
+        }
+
+        private void btnDangNhap_Click(object sender, EventArgs e)
+        {
+            DoLogin(openModally: false); // mở không modal, quay lại màn login khi form kia đóng
         }
 
         private void lab_login_Click(object sender, EventArgs e)
         {
-            string email = txtEmail.Text.Trim();
-            string matkhau = txtMatKhau.Text.Trim();
-
-            var nv = db.NhanViens.FirstOrDefault(x => x.Email == email);
-            if (nv != null && matkhau == nv.MatKhau)
-            {
-                PhienDangNhap.MaNV = nv.MaNV;
-                PhienDangNhap.HoTen = nv.HoTen;
-                PhienDangNhap.Email = nv.Email;
-                PhienDangNhap.VaiTro = nv.VaiTro;
-                lab_thongBao.Text = "Dang nhap thanh cong...";
-                lab_thongBao.ForeColor = Color.Green;
-                if (nv.VaiTro == "QL")
-                {
-                    // vai tro QL -> mo main form
-                    this.Hide();
-                    var mainForm = new MainForm(nv);
-                    mainForm.ShowDialog();
-                    this.Close();
-                }
-                else
-                {
-                    // vai tro nhan vien -> mo ban hang
-                    this.Hide();
-                    var banHangForm = new FormBanHang();
-                    banHangForm.ShowDialog();
-                    this.Close();
-                }
-                ClearInputFields();
-            }
-            else if (nv == null)
-            {
-                lab_thongBao.Text = "Tai khoan khong ton tai!";
-                lab_thongBao.ForeColor = Color.Red;
-            }
-            else
-            {
-                var mk = nv.MatKhau;
-                lab_thongBao.Text = $"Mat khau phai la: {mk}";
-                lab_thongBao.ForeColor = Color.Red;
-            }
+            DoLogin(openModally: true);  // mở modal và đóng luôn màn login sau khi xong
         }
     }
 }

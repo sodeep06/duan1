@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
+            lblTitle = new Label();
             dgvVoucher = new DataGridView();
             label2 = new Label();
             label3 = new Label();
@@ -46,24 +46,25 @@
             ((System.ComponentModel.ISupportInitialize)dgvVoucher).BeginInit();
             SuspendLayout();
             // 
-            // label1
+            // lblTitle
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.ForeColor = SystemColors.MenuHighlight;
-            label1.Location = new Point(444, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(143, 46);
-            label1.TabIndex = 1;
-            label1.Text = "Voucher";
+            lblTitle.AutoSize = true;
+            lblTitle.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblTitle.ForeColor = SystemColors.MenuHighlight;
+            lblTitle.Location = new Point(444, 9);
+            lblTitle.Name = "lblTitle";
+            lblTitle.Size = new Size(143, 46);
+            lblTitle.TabIndex = 1;
+            lblTitle.Text = "Voucher";
             // 
             // dgvVoucher
             // 
+            dgvVoucher.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             dgvVoucher.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvVoucher.Location = new Point(12, 58);
             dgvVoucher.Name = "dgvVoucher";
             dgvVoucher.RowHeadersWidth = 51;
-            dgvVoucher.Size = new Size(1027, 227);
+            dgvVoucher.Size = new Size(1001, 227);
             dgvVoucher.TabIndex = 2;
             // 
             // label2
@@ -180,7 +181,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1051, 450);
+            ClientSize = new Size(1025, 450);
             Controls.Add(btnXoa);
             Controls.Add(btnSua);
             Controls.Add(btnThem);
@@ -195,9 +196,9 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(dgvVoucher);
-            Controls.Add(label1);
+            Controls.Add(lblTitle);
             Name = "FormQLVoucher";
-            Text = "FormQLVoucher";
+            Text = "Quản Lý Voucher";
             ((System.ComponentModel.ISupportInitialize)dgvVoucher).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -205,7 +206,7 @@
 
         #endregion
 
-        private Label label1;
+        private Label lblTitle;
         private DataGridView dgvVoucher;
         private Label label2;
         private Label label3;

@@ -43,50 +43,48 @@
             // lblChaoMung
             // 
             lblChaoMung.AutoSize = true;
-            lblChaoMung.Location = new Point(298, 32);
+            lblChaoMung.Location = new Point(12, 57);
             lblChaoMung.Name = "lblChaoMung";
-            lblChaoMung.Size = new Size(57, 15);
+            lblChaoMung.Size = new Size(71, 20);
             lblChaoMung.TabIndex = 0;
             lblChaoMung.Text = "Welcome";
             // 
             // btnSanPham
             // 
-            btnSanPham.Location = new Point(10, 67);
-            btnSanPham.Margin = new Padding(3, 2, 3, 2);
+            btnSanPham.Location = new Point(11, 89);
             btnSanPham.Name = "btnSanPham";
-            btnSanPham.Size = new Size(133, 52);
+            btnSanPham.Size = new Size(152, 69);
             btnSanPham.TabIndex = 1;
-            btnSanPham.Text = "SanPham";
+            btnSanPham.Text = "Sản Phẩm";
             btnSanPham.UseVisualStyleBackColor = true;
             btnSanPham.Click += btnSanPham_Click;
             // 
             // btnBanHang
             // 
-            btnBanHang.Location = new Point(10, 124);
-            btnBanHang.Margin = new Padding(3, 2, 3, 2);
+            btnBanHang.Location = new Point(11, 165);
             btnBanHang.Name = "btnBanHang";
-            btnBanHang.Size = new Size(133, 52);
+            btnBanHang.Size = new Size(152, 69);
             btnBanHang.TabIndex = 2;
-            btnBanHang.Text = "BanHang";
+            btnBanHang.Text = "Bán Hàng";
             btnBanHang.UseVisualStyleBackColor = true;
+            btnBanHang.Click += btn_BanHang_Click;
             // 
             // btnThongKe
             // 
-            btnThongKe.Location = new Point(10, 238);
-            btnThongKe.Margin = new Padding(3, 2, 3, 2);
+            btnThongKe.Location = new Point(11, 317);
             btnThongKe.Name = "btnThongKe";
-            btnThongKe.Size = new Size(133, 52);
+            btnThongKe.Size = new Size(152, 69);
             btnThongKe.TabIndex = 4;
-            btnThongKe.Text = "ThongKe";
+            btnThongKe.Text = "Thống Kê";
             btnThongKe.UseVisualStyleBackColor = true;
+            btnThongKe.Click += btnThongKe_Click;
             // 
             // panel1
             // 
             panel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            panel1.Location = new Point(167, 68);
-            panel1.Margin = new Padding(3, 2, 3, 2);
+            panel1.Location = new Point(178, 89);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1238, 474);
+            panel1.Size = new Size(2160, 1029);
             panel1.TabIndex = 5;
             // 
             // btnNhanVien
@@ -98,7 +96,6 @@
             btnNhanVien.TabIndex = 6;
             btnNhanVien.Text = "QuanLyNV";
             btnNhanVien.UseVisualStyleBackColor = true;
-            btnNhanVien.Click += btnQuanLyNV_Click;
             // 
             // btnVoucher
             // 
@@ -109,21 +106,20 @@
             // 
             // btn_qlyNhanVien
             // 
-            btn_qlyNhanVien.Location = new Point(10, 180);
+            btn_qlyNhanVien.Location = new Point(11, 240);
             btn_qlyNhanVien.Margin = new Padding(2, 1, 2, 1);
             btn_qlyNhanVien.Name = "btn_qlyNhanVien";
-            btn_qlyNhanVien.Size = new Size(133, 55);
+            btn_qlyNhanVien.Size = new Size(152, 73);
             btn_qlyNhanVien.TabIndex = 0;
-            btn_qlyNhanVien.Text = "Quan ly nhan vien";
+            btn_qlyNhanVien.Text = "Quản Lý Nhân VIên";
             btn_qlyNhanVien.UseVisualStyleBackColor = true;
             btn_qlyNhanVien.Click += btn_qlyNhanVien_Click;
             // 
             // btn_qlyVoucher
             // 
-            btn_qlyVoucher.Location = new Point(10, 294);
-            btn_qlyVoucher.Margin = new Padding(3, 2, 3, 2);
+            btn_qlyVoucher.Location = new Point(11, 392);
             btn_qlyVoucher.Name = "btn_qlyVoucher";
-            btn_qlyVoucher.Size = new Size(133, 52);
+            btn_qlyVoucher.Size = new Size(152, 69);
             btn_qlyVoucher.TabIndex = 6;
             btn_qlyVoucher.Text = "Voucher";
             btn_qlyVoucher.UseVisualStyleBackColor = true;
@@ -131,10 +127,9 @@
             // 
             // btn_hoaDon
             // 
-            btn_hoaDon.Location = new Point(10, 415);
-            btn_hoaDon.Margin = new Padding(3, 2, 3, 2);
+            btn_hoaDon.Location = new Point(11, 467);
             btn_hoaDon.Name = "btn_hoaDon";
-            btn_hoaDon.Size = new Size(133, 52);
+            btn_hoaDon.Size = new Size(152, 69);
             btn_hoaDon.TabIndex = 7;
             btn_hoaDon.Text = "Hóa đơn";
             btn_hoaDon.UseVisualStyleBackColor = true;
@@ -142,20 +137,19 @@
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1370, 621);
+            ClientSize = new Size(1561, 1045);
+            Controls.Add(panel1);
             Controls.Add(btn_hoaDon);
             Controls.Add(btn_qlyVoucher);
             Controls.Add(btn_qlyNhanVien);
-            Controls.Add(panel1);
             Controls.Add(btnThongKe);
             Controls.Add(btnBanHang);
             Controls.Add(btnSanPham);
             Controls.Add(lblChaoMung);
-            Margin = new Padding(3, 2, 3, 2);
             Name = "MainForm";
-            Text = "MainForm";
+            Text = "Quản Lý";
             WindowState = FormWindowState.Maximized;
             ResumeLayout(false);
             PerformLayout();

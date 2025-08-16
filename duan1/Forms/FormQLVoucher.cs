@@ -1,37 +1,269 @@
 ﻿using duan1.Models;
 using duan1.Repositories;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing.Drawing2D;
 
 namespace duan1.Forms
 {
     public partial class FormQLVoucher : Form
     {
-        VoucherRepo _repo = new VoucherRepo();
+        private readonly VoucherRepo _repo = new VoucherRepo();
+
         public FormQLVoucher()
         {
             InitializeComponent();
+
+            // Grid chiếm toàn bộ vùng chứa
+            dgvVoucher.Dock = DockStyle.Fill;
+
+            // Cột responsive (theo tỉ trọng) + format
+            ConfigureVoucherColumns();
+
+            // Nạp dữ liệu
             LoadData();
+
+            // Sự kiện
             dgvVoucher.SelectionChanged += dgvVoucher_SelectionChanged;
+            dgvVoucher.DataBindingComplete += (_, __) => SetupVoucherGrid();
         }
-        
+
+        protected override void OnShown(EventArgs e)
+        {
+            base.OnShown(e);
+            ApplyTheme();
+            SetupVoucherGrid();
+        }
+
+        // ================== THEME ==================
+        private void ApplyTheme()
+        {
+            var bg = ColorTranslator.FromHtml("#F6F7FB");
+            var text = ColorTranslator.FromHtml("#2B2F33");
+            var primary = ColorTranslator.FromHtml("#5B8DEF");
+            var danger = ColorTranslator.FromHtml("#F06548");
+
+            BackColor = bg;
+            Font = new Font("Segoe UI", 9.5f);
+            ForeColor = text;
+
+            if (lblTitle != null)
+            {
+                lblTitle.Text = "Voucher";
+                lblTitle.ForeColor = primary;
+                lblTitle.Font = new Font("Segoe UI Semibold", 22f, FontStyle.Bold);
+                lblTitle.AutoSize = true;
+            }
+
+            StyleButtonOwnerDraw(btnThem, primary, null, 12);
+            StyleButtonOwnerDraw(btnSua, primary, null, 12);
+            StyleButtonOwnerDraw(btnXoa, danger, null, 12);
+
+            StyleTextBox(txtMaVoucher);
+            StyleTextBox(txtTenVoucher);
+            StyleTextBox(txtGiaTri);
+
+            StyleDatePicker(dtpNgayBatDau);
+            StyleDatePicker(dtpNgayKetThuc);
+
+            StyleGrid(dgvVoucher);
+        }
+
+        // ================== GRID CONFIG (RESPONSIVE) ==================
+        private void ConfigureVoucherColumns()
+        {
+            dgvVoucher.AutoGenerateColumns = false;
+            dgvVoucher.Columns.Clear();
+
+            // Dùng Fill + MinimumWidth để không bị "cụt" khi co giãn
+            dgvVoucher.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvVoucher.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dgvVoucher.ColumnHeadersHeight = 30;
+
+            // Mã
+            var colMa = new DataGridViewTextBoxColumn
+            {
+                Name = "MaVoucher",
+                HeaderText = "Mã Voucher",
+                DataPropertyName = "MaVoucher",
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
+                FillWeight = 120,
+                MinimumWidth = 120
+            };
+
+            // Giá trị %
+            var colGiaTri = new DataGridViewTextBoxColumn
+            {
+                Name = "GiaTri",
+                HeaderText = "Giá trị (%)",
+                DataPropertyName = "GiaTri",
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
+                FillWeight = 90,
+                MinimumWidth = 90
+            };
+            colGiaTri.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            colGiaTri.DefaultCellStyle.Format = "0'%'";
+
+            // Ngày bắt đầu
+            var colNBD = new DataGridViewTextBoxColumn
+            {
+                Name = "NgayBatDau",
+                HeaderText = "Ngày bắt đầu",
+                DataPropertyName = "NgayBatDau",
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
+                FillWeight = 120,
+                MinimumWidth = 140
+            };
+            colNBD.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            colNBD.DefaultCellStyle.Format = "dd/MM/yyyy";
+
+            // Ngày kết thúc
+            var colNKT = new DataGridViewTextBoxColumn
+            {
+                Name = "NgayKetThuc",
+                HeaderText = "Ngày kết thúc",
+                DataPropertyName = "NgayKetThuc",
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill,
+                FillWeight = 120,
+                MinimumWidth = 140
+            };
+            colNKT.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            colNKT.DefaultCellStyle.Format = "dd/MM/yyyy";
+
+            dgvVoucher.Columns.AddRange(colMa, colGiaTri, colNBD, colNKT);
+        }
+
+        private void StyleGrid(DataGridView dgv)
+        {
+            if (dgv == null) return;
+
+            dgv.EnableHeadersVisualStyles = false;
+            dgv.BackgroundColor = Color.White;
+            dgv.BorderStyle = BorderStyle.None;
+            dgv.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dgv.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+
+            dgv.ColumnHeadersDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#EEF2FF");
+            dgv.ColumnHeadersDefaultCellStyle.ForeColor = ColorTranslator.FromHtml("#1F2937");
+            dgv.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI Semibold", 9.5f);
+            dgv.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            dgv.DefaultCellStyle.BackColor = Color.White;
+            dgv.DefaultCellStyle.ForeColor = ColorTranslator.FromHtml("#111827");
+            dgv.AlternatingRowsDefaultCellStyle.BackColor = ColorTranslator.FromHtml("#F9FAFB");
+            dgv.DefaultCellStyle.SelectionBackColor = ColorTranslator.FromHtml("#DBEAFE");
+            dgv.DefaultCellStyle.SelectionForeColor = ColorTranslator.FromHtml("#111827");
+
+            dgv.RowHeadersVisible = false;
+            dgv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            dgv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv.MultiSelect = false;
+
+            // Khoá reorder/resize để layout ổn định
+            dgv.AllowUserToOrderColumns = false;
+            dgv.AllowUserToResizeColumns = false;
+
+            // Double-buffer cho mượt
+            var pi = typeof(DataGridView).GetProperty("DoubleBuffered",
+                System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+            pi?.SetValue(dgv, true, null);
+        }
+
+        private void SetupVoucherGrid()
+        {
+            if (dgvVoucher == null) return;
+            dgvVoucher.ClearSelection();
+        }
+
+        // ================== UI HELPERS ==================
+        private void StyleTextBox(TextBox tb)
+        {
+            if (tb == null) return;
+            tb.BorderStyle = BorderStyle.FixedSingle;
+            tb.BackColor = Color.White;
+            tb.Margin = new Padding(0, 2, 0, 8);
+            tb.ForeColor = ColorTranslator.FromHtml("#111827");
+            tb.Font = new Font("Segoe UI", 9.5f);
+        }
+
+        private void StyleDatePicker(DateTimePicker dtp)
+        {
+            if (dtp == null) return;
+            dtp.CalendarForeColor = ColorTranslator.FromHtml("#111827");
+            dtp.CalendarMonthBackground = Color.White;
+            dtp.Font = new Font("Segoe UI", 9.5f);
+            dtp.Format = DateTimePickerFormat.Custom;
+            dtp.CustomFormat = "dd/MM/yyyy";
+            dtp.MinDate = new DateTime(2000, 1, 1);
+        }
+
+        // ==== Owner-draw button ====
+        private void StyleButtonOwnerDraw(Button btn, Color bg, Color? fg = null, int radius = 10)
+        {
+            if (btn == null) return;
+
+            btn.FlatStyle = FlatStyle.Flat;
+            btn.FlatAppearance.BorderSize = 0;
+            btn.UseVisualStyleBackColor = false;
+
+            btn.BackColor = bg;
+            btn.ForeColor = fg ?? Color.White;
+            btn.Font = new Font("Segoe UI", 10f, FontStyle.Bold);
+            btn.TextAlign = ContentAlignment.MiddleCenter;
+            btn.Padding = new Padding(12, 6, 12, 6);
+
+            btn.Paint -= ButtonOwnerDraw_Paint;
+            btn.Resize -= ButtonOwnerDraw_Resize;
+
+            btn.Tag = radius;
+            btn.Paint += ButtonOwnerDraw_Paint;
+            btn.Resize += ButtonOwnerDraw_Resize;
+
+            ButtonOwnerDraw_Resize(btn, EventArgs.Empty);
+        }
+
+        private void ButtonOwnerDraw_Resize(object? sender, EventArgs e)
+        {
+            if (sender is not Button btn) return;
+
+            int r = btn.Tag is int rad ? Math.Min(rad, Math.Min(btn.Width, btn.Height) / 2) : 8;
+
+            using (var path = new GraphicsPath())
+            {
+                int d = r * 2;
+                var rect = btn.ClientRectangle;
+                var arc = new Rectangle(rect.Location, new Size(d, d));
+                path.AddArc(arc, 180, 90);
+                arc.X = rect.Right - d; path.AddArc(arc, 270, 90);
+                arc.Y = rect.Bottom - d; path.AddArc(arc, 0, 90);
+                arc.X = rect.Left; path.AddArc(arc, 90, 90);
+                path.CloseFigure();
+
+                btn.Region?.Dispose();
+                btn.Region = new Region(path);
+            }
+        }
+
+        private void ButtonOwnerDraw_Paint(object? sender, PaintEventArgs e)
+        {
+            if (sender is not Button btn) return;
+
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            using (var b = new SolidBrush(btn.BackColor))
+                e.Graphics.FillRectangle(b, btn.ClientRectangle);
+
+            TextRenderer.DrawText(
+                e.Graphics, btn.Text ?? "", btn.Font, btn.ClientRectangle, btn.ForeColor,
+                TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
+        }
+
+        // ================== DATA ==================
         private void LoadData()
         {
-            dgvVoucher.DataSource = _repo.GetValidVouchers();
-
-            // Đặt lại header nếu cần (tùy chỉnh giao diện)
-                dgvVoucher.Columns["MaVoucher"].HeaderText = "Mã Voucher";
-                dgvVoucher.Columns["TenVoucher"].HeaderText = "Tên Voucher";
-                dgvVoucher.Columns["GiaTri"].HeaderText = "Giá Trị";
-                dgvVoucher.Columns["NgayBatDau"].HeaderText = "Ngày Bắt Đầu";
-                dgvVoucher.Columns["NgayKetThuc"].HeaderText = "Ngày Kết Thúc";
+            dgvVoucher.DataSource = _repo.GetAll(); // tất cả voucher
+            SetupVoucherGrid();
         }
 
         private void ClearFields()
@@ -45,17 +277,15 @@ namespace duan1.Forms
 
         private void dgvVoucher_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvVoucher.CurrentRow != null && dgvVoucher.CurrentRow.Index >= 0)
+            if (dgvVoucher.CurrentRow == null || dgvVoucher.CurrentRow.Index < 0) return;
+
+            if (dgvVoucher.CurrentRow.DataBoundItem is Voucher v)
             {
-                txtMaVoucher.Text = dgvVoucher.CurrentRow.Cells["MaVoucher"].Value?.ToString();
-                txtTenVoucher.Text = dgvVoucher.CurrentRow.Cells["TenVoucher"].Value?.ToString();
-                txtGiaTri.Text = dgvVoucher.CurrentRow.Cells["GiaTri"].Value?.ToString();
-
-                if (DateTime.TryParse(dgvVoucher.CurrentRow.Cells["NgayBatDau"].Value?.ToString(), out var nbd))
-                    dtpNgayBatDau.Value = nbd;
-
-                if (DateTime.TryParse(dgvVoucher.CurrentRow.Cells["NgayKetThuc"].Value?.ToString(), out var nkt))
-                    dtpNgayKetThuc.Value = nkt;
+                txtMaVoucher.Text = v.MaVoucher ?? "";
+                txtTenVoucher.Text = string.IsNullOrWhiteSpace(v.TenVoucher) ? $"{v.GiaTri:0}%" : v.TenVoucher;
+                txtGiaTri.Text = v.GiaTri.ToString("0");
+                dtpNgayBatDau.Value = v.NgayBatDau == default ? DateTime.Now : v.NgayBatDau;
+                dtpNgayKetThuc.Value = v.NgayKetThuc == default ? DateTime.Now : v.NgayKetThuc;
             }
         }
 
@@ -83,15 +313,8 @@ namespace duan1.Forms
                 return false;
             }
 
-            DateTime now = DateTime.Now.Date;
             DateTime ngayBatDau = dtpNgayBatDau.Value.Date;
             DateTime ngayKetThuc = dtpNgayKetThuc.Value.Date;
-
-            if (ngayBatDau < now)
-            {
-                MessageBox.Show("Ngày bắt đầu không được nhỏ hơn ngày hiện tại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
 
             if (ngayKetThuc < ngayBatDau)
             {
